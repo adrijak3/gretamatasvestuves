@@ -50,8 +50,8 @@ export const WeddingContent = () => (
 
     <section id="schedule" className="container mx-auto px-6 py-20">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="font-script text-6xl text-copper">Dienos tėkmė</p>
-        <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Ne grafikas, o šventės pulsas</h2>
+        <p className="font-script text-6xl text-copper">Programa</p>
+        <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
         <div className="flow-line absolute left-6 top-0 h-full w-px sm:left-1/2" />
@@ -106,15 +106,17 @@ export const WeddingContent = () => (
         <h2 className="font-display text-5xl font-semibold text-moss-deep">Kur susitinkame</h2>
       </div>
       <div className="grid gap-4">
-        <a className="group border border-border bg-vellum p-6 transition hover:border-copper" href="https://maps.google.com/?q=%C5%A0v.+Kazimiero+ba%C5%BEny%C4%8Dia+Vilnius" target="_blank" rel="noreferrer">
+        <a className="group border border-border bg-vellum p-6 transition hover:border-copper" href="https://www.google.com/maps/search/?api=1&query=%C5%A0v.+Kazimiero+ba%C5%BEny%C4%8Dia+Vilnius" target="_blank" rel="noreferrer">
           <MapPin className="h-6 w-6 text-copper" />
           <h3 className="mt-3 font-display text-3xl text-moss-deep group-hover:text-copper">Šv. Kazimiero bažnyčia</h3>
           <p className="text-muted-foreground">Didžioji g. 34, Vilnius</p>
+          <p className="mt-2 text-sm uppercase tracking-[0.2em] text-copper">Atidaryti žemėlapyje →</p>
         </a>
-        <a className="group border border-border bg-vellum p-6 transition hover:border-copper" href="https://maps.google.com/?q=Elven+L.+Stuokos-Gucevi%C4%8Diaus+g.+Vilnius" target="_blank" rel="noreferrer">
+        <a className="group border border-border bg-vellum p-6 transition hover:border-copper" href="https://www.google.com/maps/search/?api=1&query=Elven+restoranas+Vilnius" target="_blank" rel="noreferrer">
           <MapPin className="h-6 w-6 text-copper" />
           <h3 className="mt-3 font-display text-3xl text-moss-deep group-hover:text-copper">Restoranas Elven</h3>
           <p className="text-muted-foreground">L. Stuokos-Gucevičiaus g., Vilnius</p>
+          <p className="mt-2 text-sm uppercase tracking-[0.2em] text-copper">Atidaryti žemėlapyje →</p>
         </a>
       </div>
     </section>
