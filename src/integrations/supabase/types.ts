@@ -14,13 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      wedding_admin_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      wedding_guests: {
+        Row: {
+          created_at: string
+          display_name: string
+          greeting: string
+          id: string
+          notes: string | null
+          partner_name: string | null
+          party_size: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          greeting: string
+          id?: string
+          notes?: string | null
+          partner_name?: string | null
+          party_size?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          greeting?: string
+          id?: string
+          notes?: string | null
+          partner_name?: string | null
+          party_size?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      wedding_rsvps: {
+        Row: {
+          attending: boolean
+          dietary_notes: string | null
+          first_name: string
+          guest_id: string
+          id: string
+          last_name: string
+          meal_choice: string | null
+          message: string | null
+          partner_first_name: string | null
+          partner_last_name: string | null
+          partner_meal_choice: string | null
+          submitted_at: string
+          updated_at: string
+        }
+        Insert: {
+          attending: boolean
+          dietary_notes?: string | null
+          first_name: string
+          guest_id: string
+          id?: string
+          last_name: string
+          meal_choice?: string | null
+          message?: string | null
+          partner_first_name?: string | null
+          partner_last_name?: string | null
+          partner_meal_choice?: string | null
+          submitted_at?: string
+          updated_at?: string
+        }
+        Update: {
+          attending?: boolean
+          dietary_notes?: string | null
+          first_name?: string
+          guest_id?: string
+          id?: string
+          last_name?: string
+          meal_choice?: string | null
+          message?: string | null
+          partner_first_name?: string | null
+          partner_last_name?: string | null
+          partner_meal_choice?: string | null
+          submitted_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wedding_rsvps_guest_id_fkey"
+            columns: ["guest_id"]
+            isOneToOne: true
+            referencedRelation: "wedding_guests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      admin_list_wedding_guests: {
+        Args: { _token: string }
+        Returns: {
+          created_at: string
+          display_name: string
+          greeting: string
+          id: string
+          notes: string
+          partner_name: string
+          party_size: number
+          slug: string
+          updated_at: string
+        }[]
+      }
+      admin_list_wedding_rsvps: {
+        Args: { _token: string }
+        Returns: {
+          attending: boolean
+          dietary_notes: string
+          first_name: string
+          guest_display_name: string
+          guest_id: string
+          id: string
+          last_name: string
+          meal_choice: string
+          message: string
+          partner_first_name: string
+          partner_last_name: string
+          partner_meal_choice: string
+          submitted_at: string
+          updated_at: string
+        }[]
+      }
+      create_wedding_admin_session: {
+        Args: { _password: string }
+        Returns: string
+      }
+      get_wedding_guest: {
+        Args: { _slug: string }
+        Returns: {
+          display_name: string
+          greeting: string
+          id: string
+          partner_name: string
+          party_size: number
+          slug: string
+        }[]
+      }
+      is_wedding_admin: { Args: { _token: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
