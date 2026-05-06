@@ -15,6 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        invitation:
+          "border border-copper/60 bg-copper text-copper-foreground shadow-[0_14px_32px_hsl(var(--copper)/0.22)] hover:bg-copper/90 hover:shadow-[0_18px_44px_hsl(var(--copper)/0.28)]",
+        moss:
+          "border border-moss-deep/20 bg-moss text-moss-foreground shadow-[0_14px_34px_hsl(var(--moss-deep)/0.18)] hover:bg-moss-deep hover:text-primary-foreground",
+        vellum:
+          "border border-border bg-vellum text-foreground hover:border-copper hover:bg-pearl",
       },
       size: {
         default: "h-10 px-4 py-2",
