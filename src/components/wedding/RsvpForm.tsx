@@ -19,11 +19,24 @@ type RsvpFormProps = {
 
 const deadline = new Date("2026-07-07T00:00:00+03:00");
 
+const splitName = (full: string | null | undefined) => {
+  const value = (full ?? "").trim();
+  if (!value) return { first: "", last: "" };
+  const parts = value.split(/\s+/);
+  return { first: parts[0] ?? "", last: parts.slice(1).join(" ") };
+};
+
 export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
   const [attending, setAttending] = useState(true);
   const [saving, setSaving] = useState(false);
-  const isCouple = (guest?.party_size ?? 2) === 2;
+  const isCouple = (guest?.party_size ?? 1) === 2;
   const isClosed = useMemo(() => Date.now() >= deadline.getTime(), []);
+
+  const primary = useMemo(() => splitName(guest?.display_name), [guest?.display_name]);
+  const partner = useMemo(() => splitName(guest?.partner_name ?? ""), [guest?.partner_name]);
+
+  const primaryLabel = primary.first || "Tavo";
+  const partnerLabel = partner.first || "Antro svečio";
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,7 +76,7 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
           <p className="font-script text-6xl text-copper">RSVP</p>
           <h2 className="font-display text-5xl font-semibold leading-none text-moss-deep sm:text-6xl">Dalyvavimo patvirtinimas</h2>
           <p className="mt-6 leading-8 text-muted-foreground">
-            Atsakymo lauksime iki <strong className="font-semibold text-moss-deep">liepos 6 d.</strong> Po šios datos registracija užsidarys.
+            Atsakymo lauksime iki <strong className="font-semibold text-moss-deep">2026 m. liepos 6 d.</strong> Po šios datos registracija užsidarys.
           </p>
           {guest && <p className="mt-6 font-display text-3xl text-moss">{guest.greeting}</p>}
         </div>
@@ -73,11 +86,11 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                 Vardas
-                <input name="firstName" required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                <input name="firstName" defaultValue={primary.first} required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
               </label>
               <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                 Pavardė
-                <input name="lastName" required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                <input name="lastName" defaultValue={primary.last} required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
               </label>
             </div>
 
@@ -85,11 +98,11 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                   Antro svečio vardas
-                  <input name="partnerFirstName" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                  <input name="partnerFirstName" defaultValue={partner.first} className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                 </label>
                 <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                   Antro svečio pavardė
-                  <input name="partnerLastName" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                  <input name="partnerLastName" defaultValue={partner.last} className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                 </label>
               </div>
             )}
@@ -99,28 +112,30 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
               <Button type="button" variant={!attending ? "moss" : "vellum"} onClick={() => setAttending(false)}>Negalėsiu dalyvauti</Button>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="grid gap-2 text-sm font-semibold text-moss-deep">
-                Meniu pasirinkimas
-                <select name="mealChoice" className="border border-input bg-background px-4 py-3 font-body text-foreground">
-                  <option value="">Pasirinkti</option>
-                  <option value="mesa">Mėsos patiekalas</option>
-                  <option value="zuvis">Žuvies patiekalas</option>
-                  <option value="vegetariskas">Vegetariškas</option>
-                </select>
-              </label>
-              {isCouple && (
+            {attending && (
+              <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm font-semibold text-moss-deep">
-                  Antro svečio meniu
-                  <select name="partnerMealChoice" className="border border-input bg-background px-4 py-3 font-body text-foreground">
+                  Meniu pasirinkimas ({primaryLabel})
+                  <select name="mealChoice" className="border border-input bg-background px-4 py-3 font-body text-foreground">
                     <option value="">Pasirinkti</option>
                     <option value="mesa">Mėsos patiekalas</option>
                     <option value="zuvis">Žuvies patiekalas</option>
                     <option value="vegetariskas">Vegetariškas</option>
                   </select>
                 </label>
-              )}
-            </div>
+                {isCouple && (
+                  <label className="grid gap-2 text-sm font-semibold text-moss-deep">
+                    Meniu pasirinkimas ({partnerLabel})
+                    <select name="partnerMealChoice" className="border border-input bg-background px-4 py-3 font-body text-foreground">
+                      <option value="">Pasirinkti</option>
+                      <option value="mesa">Mėsos patiekalas</option>
+                      <option value="zuvis">Žuvies patiekalas</option>
+                      <option value="vegetariskas">Vegetariškas</option>
+                    </select>
+                  </label>
+                )}
+              </div>
+            )}
 
             <label className="grid gap-2 text-sm font-semibold text-moss-deep">
               Mitybos pastabos
