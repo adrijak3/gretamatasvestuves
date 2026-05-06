@@ -49,8 +49,8 @@ const Index = () => {
       <Petals />
       {!opened && <OpeningLetter greeting={guest?.greeting ?? fallbackGuest.greeting} onOpen={() => setOpened(true)} />}
       <MusicPlayer enabled={opened} />
-      <WeddingContent />
       <Countdown />
+      <WeddingContent />
       <RsvpForm guest={guest} fallbackSlug={slug} />
       <AdminPanel />
     </div>
