@@ -13,7 +13,7 @@ export const MusicPlayer = ({ enabled }: MusicPlayerProps) => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !enabled) return;
-    audio.volume = 0.3;
+    audio.volume = 0.35;
     audio.loop = true;
     audio.play().catch(() => undefined);
   }, [enabled]);
