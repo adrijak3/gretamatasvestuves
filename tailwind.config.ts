@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ["Cormorant Garamond", "serif"],
+        body: ["Karla", "sans-serif"],
+        script: ["Great Vibes", "cursive"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,6 +52,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        invitation: {
+          DEFAULT: "hsl(var(--invitation))",
+          foreground: "hsl(var(--invitation-foreground))",
+        },
+        moss: {
+          DEFAULT: "hsl(var(--moss))",
+          foreground: "hsl(var(--moss-foreground))",
+          deep: "hsl(var(--moss-deep))",
+          soft: "hsl(var(--moss-soft))",
+        },
+        copper: {
+          DEFAULT: "hsl(var(--copper))",
+          foreground: "hsl(var(--copper-foreground))",
+          glow: "hsl(var(--copper-glow))",
+        },
+        pearl: "hsl(var(--pearl))",
+        vellum: "hsl(var(--vellum))",
+        navy: "hsl(var(--navy))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -64,6 +87,23 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        petal: {
+          "0%": { transform: "translate3d(0,-10vh,0) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "0.9" },
+          "100%": { transform: "translate3d(var(--drift),110vh,0) rotate(540deg)", opacity: "0" },
+        },
+        shimmer: {
+          "0%, 100%": { transform: "translateX(-18%)", opacity: "0.45" },
+          "50%": { transform: "translateX(18%)", opacity: "0.85" },
+        },
+        seal: {
+          "0%, 100%": { transform: "scale(1) rotate(-3deg)" },
+          "50%": { transform: "scale(1.035) rotate(2deg)" },
+        },
+        reveal: {
+          "0%": { opacity: "0", transform: "translateY(18px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -82,6 +122,10 @@ export default {
         },
       },
       animation: {
+        petal: "petal var(--fall-speed) linear infinite",
+        shimmer: "shimmer 9s ease-in-out infinite",
+        seal: "seal 5s ease-in-out infinite",
+        reveal: "reveal 0.8s ease-out both",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
