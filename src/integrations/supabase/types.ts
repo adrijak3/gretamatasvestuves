@@ -129,6 +129,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_delete_wedding_guest: {
+        Args: { _id: string; _token: string }
+        Returns: boolean
+      }
       admin_list_wedding_guests: {
         Args: { _token: string }
         Returns: {
@@ -162,6 +166,19 @@ export type Database = {
           updated_at: string
         }[]
       }
+      admin_save_wedding_guest: {
+        Args: {
+          _display_name: string
+          _greeting: string
+          _id: string
+          _notes: string
+          _partner_name: string
+          _party_size: number
+          _slug: string
+          _token: string
+        }
+        Returns: string
+      }
       create_wedding_admin_session: {
         Args: { _password: string }
         Returns: string
@@ -178,6 +195,21 @@ export type Database = {
         }[]
       }
       is_wedding_admin: { Args: { _token: string }; Returns: boolean }
+      submit_wedding_rsvp: {
+        Args: {
+          _attending: boolean
+          _dietary_notes: string
+          _first_name: string
+          _last_name: string
+          _meal_choice: string
+          _message: string
+          _partner_first_name: string
+          _partner_last_name: string
+          _partner_meal_choice: string
+          _slug: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
