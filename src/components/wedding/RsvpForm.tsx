@@ -73,7 +73,7 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
     <section id="rsvp" className="relative overflow-hidden bg-vellum py-20">
       <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div>
-          <p className="font-script text-6xl text-copper">RSVP</p>
+          <p className="font-display italic text-4xl uppercase tracking-[0.5em] text-copper">RSVP</p>
           <h2 className="font-display text-5xl font-semibold leading-none text-moss-deep sm:text-6xl">Dalyvavimo patvirtinimas</h2>
           <p className="mt-6 leading-8 text-muted-foreground">
             Atsakymo lauksime iki <strong className="font-semibold text-moss-deep">2026 m. liepos 6 d.</strong> Po šios datos registracija užsidarys.

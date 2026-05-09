@@ -6,45 +6,61 @@ type OpeningLetterProps = {
 };
 
 export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => (
-  <div className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-moss-deep px-4 text-primary-foreground">
+  <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-moss-deep px-4 py-8 text-primary-foreground">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,hsl(var(--copper-glow)/0.18),transparent_42rem)]" />
 
-    <div className="relative w-full max-w-[640px] animate-reveal">
-      <div className="absolute -inset-6 border border-copper/25" />
-      <div className="absolute -inset-3 border border-copper/15" />
-      <div className="paper-grain relative overflow-hidden border border-copper/40 bg-vellum px-6 py-12 text-center text-foreground shadow-[0_28px_90px_hsl(var(--moss-deep)/0.45)] sm:px-14 sm:py-16">
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-pearl/60 to-transparent" />
+    {/* Translucent watermark initials & date */}
+    <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center select-none">
+      <span className="font-display text-[34vw] sm:text-[22vw] font-light leading-none text-pearl/[0.05] tracking-tight">
+        G<span className="font-script align-middle mx-2">&amp;</span>M
+      </span>
+      <span className="mt-4 font-display text-base sm:text-xl uppercase tracking-[0.6em] text-pearl/10">
+        2026 · 09 · 06
+      </span>
+    </div>
 
-        <p className="relative font-display text-xs uppercase tracking-[0.5em] text-copper">Kvietimas</p>
-        <div className="relative mx-auto mt-4 h-px w-16 bg-copper/50" />
+    <div className="relative w-full max-w-[560px] animate-reveal">
+      {/* Envelope back/flap shadow */}
+      <div className="absolute -inset-x-4 -top-2 -bottom-3 bg-[linear-gradient(180deg,hsl(var(--vellum)),hsl(38_30%_88%))] shadow-[0_30px_80px_hsl(var(--moss-deep)/0.5)]" />
+      {/* Envelope flap (triangle) */}
+      <div
+        className="absolute -inset-x-4 -top-2 h-32 bg-[linear-gradient(180deg,hsl(38_36%_90%),hsl(38_30%_84%))]"
+        style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+      />
+      <div className="absolute left-1/2 top-24 h-px w-32 -translate-x-1/2 bg-copper/30" />
 
-        <p className="relative mt-8 font-script text-4xl leading-tight text-moss-deep sm:text-5xl">{greeting}</p>
+      {/* Letter inside */}
+      <div className="paper-grain relative mt-20 overflow-hidden border border-copper/40 bg-vellum px-6 py-10 text-center text-foreground shadow-[0_18px_50px_hsl(var(--moss-deep)/0.35)] sm:px-12 sm:py-14">
+        <p className="font-display text-[10px] uppercase tracking-[0.55em] text-copper sm:text-xs">Kvietimas</p>
+        <div className="mx-auto mt-3 h-px w-12 bg-copper/50" />
 
-        <p className="relative mt-8 font-display italic text-lg leading-8 text-muted-foreground sm:text-xl">
-          su didžiausiu džiaugsmu kviečiame Jus dalyvauti<br />mūsų santuokos šventėje
+        <p className="mt-6 font-display italic text-2xl text-moss-deep sm:text-3xl">{greeting}</p>
+
+        <p className="mt-5 font-display italic text-base leading-7 text-muted-foreground sm:text-lg">
+          su didžiausiu džiaugsmu kviečiame Jus<br />dalyvauti mūsų santuokos šventėje
         </p>
 
-        <h1 className="relative mt-8 font-display text-4xl font-medium tracking-[0.04em] text-moss-deep sm:text-5xl">
+        <h1 className="mt-7 font-display text-4xl font-light tracking-[0.06em] text-moss-deep sm:text-5xl">
           Matas <span className="font-script text-copper text-5xl sm:text-6xl align-middle">&amp;</span> Greta
         </h1>
 
-        <div className="relative mx-auto mt-8 flex items-center justify-center gap-4 text-moss">
-          <span className="h-px w-10 bg-moss/40" />
-          <p className="font-display text-sm uppercase tracking-[0.35em]">2026 · 09 · 06</p>
-          <span className="h-px w-10 bg-moss/40" />
+        <div className="mx-auto mt-6 flex items-center justify-center gap-3 text-moss">
+          <span className="h-px w-8 bg-moss/40" />
+          <p className="font-display text-xs uppercase tracking-[0.4em] sm:text-sm">2026 · 09 · 06</p>
+          <span className="h-px w-8 bg-moss/40" />
         </div>
 
         <button
           type="button"
           onClick={onOpen}
-          className="copper-seal relative z-10 mx-auto mt-12 grid h-24 w-24 place-items-center rounded-full text-center font-script text-2xl text-copper-foreground transition-transform duration-300 hover:scale-105 active:scale-95 animate-seal sm:h-28 sm:w-28"
+          className="copper-seal relative z-10 mx-auto mt-9 grid h-20 w-20 place-items-center rounded-full font-display italic text-xl text-copper-foreground transition-transform duration-300 hover:scale-105 active:scale-95 animate-seal sm:h-24 sm:w-24"
           aria-label="Atidaryti kvietimą"
         >
           <span>M&amp;G</span>
-          <span className="absolute inset-2 rounded-full border border-pearl/35" />
+          <span className="absolute inset-2 rounded-full border border-pearl/40" />
         </button>
 
-        <Button type="button" variant="moss" className="relative z-10 mt-6" onClick={onOpen}>
+        <Button type="button" variant="moss" className="relative z-10 mt-5" onClick={onOpen}>
           Atverti kvietimą
         </Button>
       </div>

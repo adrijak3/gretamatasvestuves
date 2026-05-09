@@ -1,4 +1,5 @@
 import { Church, Clock, Gift, HeartHandshake, MapPin, Moon, Shirt, Sparkles } from "lucide-react";
+import { Countdown } from "./Countdown";
 
 const timeline = [
   { time: "14:40", title: "Atvykimas", text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
@@ -18,7 +19,7 @@ export const WeddingContent = () => (
   <main className="relative z-20">
     <section className="container mx-auto grid min-h-[92vh] content-center gap-12 px-6 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
       <div className="animate-reveal">
-        <p className="font-script text-6xl text-copper sm:text-7xl">Kviečiame švęsti kartu</p>
+        <p className="font-display italic text-3xl text-copper sm:text-4xl">Kviečiame švęsti kartu</p>
         <h2 className="mt-3 max-w-3xl font-display text-6xl font-semibold leading-[0.88] text-moss-deep sm:text-7xl lg:text-8xl">
           Matas <span className="font-script text-copper">&amp;</span> Greta
         </h2>
@@ -48,9 +49,11 @@ export const WeddingContent = () => (
       </div>
     </section>
 
+    <Countdown />
+
     <section id="schedule" className="container mx-auto px-6 py-20">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="font-script text-6xl text-copper">Programa</p>
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Programa</p>
         <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
@@ -102,7 +105,7 @@ export const WeddingContent = () => (
 
     <section id="map" className="container mx-auto grid gap-8 px-6 py-20 lg:grid-cols-2">
       <div>
-        <p className="font-script text-6xl text-copper">Vietos</p>
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Vietos</p>
         <h2 className="font-display text-5xl font-semibold text-moss-deep">Kur susitinkame</h2>
       </div>
       <div className="grid gap-4">
@@ -123,7 +126,7 @@ export const WeddingContent = () => (
 
     <section id="faq" className="container mx-auto px-6 pb-20">
       <div className="mx-auto max-w-3xl">
-        <p className="font-script text-6xl text-copper">Klausimai</p>
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Klausimai</p>
         <div className="mt-8 divide-y divide-border border-y border-border bg-vellum">
           {[
             ["Kada atvykti?", "Į santuokos ceremoniją prašome atvykti 15–20 min. anksčiau."],

@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { Flower2, Link2, LockKeyhole, Plus, Trash2 } from "lucide-react";
+import { Flower2, Link2, LockKeyhole, MailCheck, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -130,6 +130,11 @@ export const AdminPanel = () => {
     toast.success("Nuoroda nukopijuota.");
   };
 
+  const copyRsvpLink = async (slug: string) => {
+    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}#rsvp`);
+    toast.success("RSVP nuoroda nukopijuota.");
+  };
+
   return (
     <>
       <button
@@ -146,7 +151,7 @@ export const AdminPanel = () => {
           <div className="mx-auto my-8 max-w-6xl border border-copper/30 bg-background shadow-[0_30px_90px_hsl(var(--moss-deep)/0.45)]">
             <div className="flex items-center justify-between border-b border-border p-5">
               <div>
-                <p className="font-script text-4xl text-copper">Slaptas meniu</p>
+                <p className="font-display italic text-2xl uppercase tracking-[0.4em] text-copper">Slaptas meniu</p>
                 <h2 className="font-display text-4xl text-moss-deep">Svečiai ir RSVP</h2>
               </div>
               <Button type="button" variant="vellum" onClick={() => setOpen(false)}>Uždaryti</Button>
@@ -191,7 +196,8 @@ export const AdminPanel = () => {
                             <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={guest.slug}</p>
                           </div>
                           <div className="flex gap-2">
-                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)}><Link2 className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyRsvpLink(guest.slug)} title="RSVP nuoroda (vardas + auto-užpildymas)"><MailCheck className="h-4 w-4" /></Button>
                             <Button type="button" variant="moss" size="sm" onClick={() => setEditing({ ...guest, partner_name: guest.partner_name ?? "", notes: guest.notes ?? "" })}>Keisti</Button>
                             <Button type="button" variant="destructive" size="sm" onClick={() => deleteGuest(guest.id)}><Trash2 className="h-4 w-4" /></Button>
                           </div>

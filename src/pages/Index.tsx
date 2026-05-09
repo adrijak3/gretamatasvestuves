@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { AdminPanel } from "@/components/wedding/AdminPanel";
-import { Countdown } from "@/components/wedding/Countdown";
 import { MusicPlayer } from "@/components/wedding/MusicPlayer";
 import { OpeningLetter } from "@/components/wedding/OpeningLetter";
 import { Petals } from "@/components/wedding/Petals";
@@ -27,7 +26,8 @@ const fallbackGuest: Guest = {
 };
 
 const Index = () => {
-  const [opened, setOpened] = useState(false);
+  const directToRsvp = typeof window !== "undefined" && window.location.hash === "#rsvp";
+  const [opened, setOpened] = useState(directToRsvp);
   const [guest, setGuest] = useState<Guest | null>(fallbackGuest);
   const slug = useMemo(() => new URLSearchParams(window.location.search).get("s") || "mieli-sveciai", []);
 
@@ -38,18 +38,20 @@ const Index = () => {
       .then(({ data }: { data: Guest[] | null }) => {
         if (!alive) return;
         setGuest(data?.[0] ?? fallbackGuest);
+        if (directToRsvp) {
+          setTimeout(() => document.getElementById("rsvp")?.scrollIntoView({ behavior: "smooth" }), 200);
+        }
       });
     return () => {
       alive = false;
     };
-  }, [slug]);
+  }, [slug, directToRsvp]);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <Petals />
       {!opened && <OpeningLetter greeting={guest?.greeting ?? fallbackGuest.greeting} onOpen={() => setOpened(true)} />}
       <MusicPlayer enabled={opened} />
-      <Countdown />
       <WeddingContent />
       <RsvpForm guest={guest} fallbackSlug={slug} />
       <AdminPanel />
