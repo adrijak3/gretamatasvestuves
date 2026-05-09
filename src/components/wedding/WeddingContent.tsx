@@ -1,4 +1,5 @@
 import { Church, Clock, Gift, HeartHandshake, MapPin, Moon, Shirt, Sparkles } from "lucide-react";
+import { Countdown } from "./Countdown";
 
 const timeline = [
   { time: "14:40", title: "Atvykimas", text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
@@ -47,6 +48,8 @@ export const WeddingContent = () => (
         </div>
       </div>
     </section>
+
+    <Countdown />
 
     <section id="schedule" className="container mx-auto px-6 py-20">
       <div className="mx-auto max-w-3xl text-center">
