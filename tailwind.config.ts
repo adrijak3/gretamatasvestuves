@@ -104,21 +104,42 @@ export default {
           "0%": { opacity: "0", transform: "translateY(18px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "flap-open": {
+          "0%": { transform: "rotateX(0deg)" },
+          "100%": { transform: "rotateX(-180deg)" },
+        },
+        "letter-rise": {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "1" },
+          "60%": { transform: "translateY(-30vh) scale(1.05)", opacity: "1" },
+          "100%": { transform: "translateY(-60vh) scale(1.1)", opacity: "0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-slow": {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.92)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "shimmer-text": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -126,6 +147,13 @@ export default {
         shimmer: "shimmer 9s ease-in-out infinite",
         seal: "seal 5s ease-in-out infinite",
         reveal: "reveal 0.8s ease-out both",
+        "flap-open": "flap-open 1.1s cubic-bezier(.65,.05,.36,1) forwards",
+        "letter-rise": "letter-rise 1.4s 0.6s cubic-bezier(.65,.05,.36,1) forwards",
+        "fade-in": "fade-in 0.7s ease-out both",
+        "fade-in-slow": "fade-in-slow 1s ease-out both",
+        "scale-in": "scale-in 0.6s ease-out both",
+        float: "float 4s ease-in-out infinite",
+        "shimmer-text": "shimmer-text 4s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
