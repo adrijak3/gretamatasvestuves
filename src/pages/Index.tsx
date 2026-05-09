@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { AdminPanel } from "@/components/wedding/AdminPanel";
-import { Countdown } from "@/components/wedding/Countdown";
 import { MusicPlayer } from "@/components/wedding/MusicPlayer";
 import { OpeningLetter } from "@/components/wedding/OpeningLetter";
 import { Petals } from "@/components/wedding/Petals";
