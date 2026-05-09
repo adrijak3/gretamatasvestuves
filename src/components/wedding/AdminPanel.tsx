@@ -196,7 +196,8 @@ export const AdminPanel = () => {
                             <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={guest.slug}</p>
                           </div>
                           <div className="flex gap-2">
-                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)}><Link2 className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyRsvpLink(guest.slug)} title="RSVP nuoroda (vardas + auto-užpildymas)"><MailCheck className="h-4 w-4" /></Button>
                             <Button type="button" variant="moss" size="sm" onClick={() => setEditing({ ...guest, partner_name: guest.partner_name ?? "", notes: guest.notes ?? "" })}>Keisti</Button>
                             <Button type="button" variant="destructive" size="sm" onClick={() => deleteGuest(guest.id)}><Trash2 className="h-4 w-4" /></Button>
                           </div>
