@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { Flower2, Link2, LockKeyhole, Plus, Trash2 } from "lucide-react";
+import { Flower2, Link2, LockKeyhole, MailCheck, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -128,6 +128,11 @@ export const AdminPanel = () => {
   const copyLink = async (slug: string) => {
     await navigator.clipboard.writeText(`${baseUrl}?s=${slug}`);
     toast.success("Nuoroda nukopijuota.");
+  };
+
+  const copyRsvpLink = async (slug: string) => {
+    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}#rsvp`);
+    toast.success("RSVP nuoroda nukopijuota.");
   };
 
   return (
