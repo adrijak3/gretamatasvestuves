@@ -146,7 +146,7 @@ export const AdminPanel = () => {
           <div className="mx-auto my-8 max-w-6xl border border-copper/30 bg-background shadow-[0_30px_90px_hsl(var(--moss-deep)/0.45)]">
             <div className="flex items-center justify-between border-b border-border p-5">
               <div>
-                <p className="font-script text-4xl text-copper">Slaptas meniu</p>
+                <p className="font-display italic text-2xl uppercase tracking-[0.4em] text-copper">Slaptas meniu</p>
                 <h2 className="font-display text-4xl text-moss-deep">Svečiai ir RSVP</h2>
               </div>
               <Button type="button" variant="vellum" onClick={() => setOpen(false)}>Uždaryti</Button>
