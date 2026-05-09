@@ -8,7 +8,7 @@ const petals = Array.from({ length: 28 }, (_, index) => ({
 }));
 
 export const Petals = () => (
-  <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden" aria-hidden="true">
+  <div className="pointer-events-none fixed inset-0 z-30 overflow-hidden" aria-hidden="true">
     {petals.map((petal) => (
       <span
         key={petal.id}

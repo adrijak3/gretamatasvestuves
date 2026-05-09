@@ -54,7 +54,7 @@ export const AdminPanel = () => {
   const [editing, setEditing] = useState(emptyGuest);
   const [loading, setLoading] = useState(false);
 
-  const baseUrl = useMemo(() => window.location.origin + window.location.pathname, []);
+  const baseUrl = useMemo(() => "https://gretamatasvestuves.lovable.app/", []);
 
   const load = async (activeToken = token) => {
     if (!activeToken) return;
