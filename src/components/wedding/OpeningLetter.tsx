@@ -19,107 +19,96 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
   const handleOpen = () => {
     if (opening) return;
     setOpening(true);
-    setTimeout(() => onOpen(), 1700);
+    setTimeout(() => onOpen(), 2300);
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 grid place-items-center overflow-y-auto px-4 py-10 text-foreground transition-opacity duration-500 ${
+      className={`fixed inset-0 z-50 grid place-items-center overflow-y-auto px-4 py-8 text-foreground transition-opacity duration-700 ${
         opening ? "opacity-0" : "opacity-100"
       }`}
       style={{
-        transitionDelay: opening ? "1.2s" : "0s",
+        transitionDelay: opening ? "1.65s" : "0s",
         backgroundImage: [
-          "radial-gradient(circle at 14% 18%, hsl(340 45% 78% / 0.55), transparent 30rem)",
-          "radial-gradient(circle at 82% 22%, hsl(28 55% 80% / 0.55), transparent 28rem)",
-          "radial-gradient(circle at 18% 82%, hsl(95 28% 60% / 0.45), transparent 32rem)",
-          "radial-gradient(circle at 86% 78%, hsl(355 50% 82% / 0.5), transparent 30rem)",
-          "linear-gradient(135deg, hsl(38 38% 92%), hsl(28 32% 86%))",
+          "radial-gradient(circle at 18% 18%, hsl(var(--moss-soft) / 0.65), transparent 28rem)",
+          "radial-gradient(circle at 82% 24%, hsl(var(--copper) / 0.18), transparent 28rem)",
+          "radial-gradient(circle at 25% 85%, hsl(var(--moss) / 0.34), transparent 34rem)",
+          "linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary) / 0.7))",
         ].join(","),
       }}
     >
-      {/* Drifting petal flecks */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute block h-3 w-3 rounded-full bg-pearl/60 blur-[2px] animate-float"
-            style={{
-              left: `${(i * 7.3) % 100}%`,
-              top: `${(i * 11.7) % 100}%`,
-              animationDelay: `${i * 0.4}s`,
-              animationDuration: `${5 + (i % 4)}s`,
-            }}
-          />
-        ))}
+      <div className="pointer-events-none absolute inset-0 opacity-40 paper-grain" />
+
+      <div className="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 select-none text-right font-display text-[7.5rem] font-semibold leading-[0.78] tracking-normal text-moss-deep/10 lg:block xl:right-14 xl:text-[9rem]">
+        <div>26</div>
+        <div>09</div>
+        <div>06</div>
       </div>
 
-      {/* Right-side date column (sviesoforas) — desktop only */}
-      <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 select-none flex-col items-center gap-6 lg:flex">
-        {["26", "09", "06"].map((n, i) => (
-          <div
-            key={i}
-            className="grid h-24 w-24 place-items-center rounded-full border border-copper/40 bg-pearl/70 font-display text-4xl font-light tracking-wide text-moss-deep shadow-[0_8px_30px_hsl(var(--moss-deep)/0.18)] backdrop-blur"
-            style={{ animation: `float 4s ease-in-out ${i * 0.3}s infinite` }}
-          >
-            {n}
-          </div>
-        ))}
-      </div>
-
-      <div className="relative w-full max-w-[520px] text-center animate-scale-in">
-        <p className="font-display italic tracking-[0.35em] text-xs uppercase text-moss-deep/70 sm:text-sm">
-          You&apos;ve got mail from
-        </p>
-        <h1 className="mt-3 font-script text-5xl leading-[1.05] text-moss-deep sm:text-6xl">
-          Greta &amp; Matas
-        </h1>
-
-        {/* Envelope */}
+      <div className="relative w-full max-w-[560px] text-center animate-scale-in">
         <div
-          className="relative mx-auto mt-10 w-full max-w-[440px]"
+          className="relative mx-auto w-full max-w-[470px] pb-8 pt-28 sm:pt-36"
           style={{ perspective: "1400px" }}
         >
+          <div
+            className={`lace-heart-invite pointer-events-none absolute left-1/2 top-0 z-30 w-[min(86vw,390px)] -translate-x-1/2 ${opening ? "is-open" : ""}`}
+            aria-hidden={!opening}
+          >
+            <svg viewBox="0 0 500 455" className="absolute inset-0 h-full w-full" aria-hidden="true">
+              <path
+                d="M250 420C168 347 72 282 72 173c0-61 44-105 99-105 36 0 63 18 79 45 16-27 43-45 79-45 55 0 99 44 99 105 0 109-96 174-178 247Z"
+                fill="hsl(var(--pearl) / 0.92)"
+                stroke="hsl(var(--pearl))"
+                strokeWidth="34"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M250 420C168 347 72 282 72 173c0-61 44-105 99-105 36 0 63 18 79 45 16-27 43-45 79-45 55 0 99 44 99 105 0 109-96 174-178 247Z"
+                fill="none"
+                stroke="hsl(var(--copper) / 0.42)"
+                strokeWidth="2"
+                strokeDasharray="2 14"
+              />
+              <path
+                d="M250 408C174 341 90 281 90 178c0-50 35-87 83-87 35 0 59 23 77 58 18-35 42-58 77-58 48 0 83 37 83 87 0 103-84 163-160 230Z"
+                fill="none"
+                stroke="hsl(var(--moss-deep) / 0.16)"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <div className="relative z-10 mx-auto flex aspect-[1.1/1] w-full flex-col items-center justify-center px-14 pb-12 pt-16 text-center">
+              <p className="font-display text-2xl font-semibold leading-tight text-moss-deep sm:text-3xl">{greeting}</p>
+              <p className="mt-3 max-w-[250px] text-sm leading-6 text-muted-foreground sm:text-base">
+                kviečiame kartu švęsti mūsų santuokos dieną.
+              </p>
+              <p className="mt-4 font-display text-sm uppercase tracking-[0.32em] text-copper">2026 09 06</p>
+            </div>
+          </div>
+
           <button
             type="button"
             onClick={handleOpen}
             disabled={opening}
             aria-label="Atverti voką"
-            className="group relative block w-full"
+            className="group relative z-20 block w-full disabled:pointer-events-none"
           >
-            {/* Envelope body */}
-            <div className="relative aspect-[5/3.4] w-full overflow-hidden rounded-sm bg-[linear-gradient(180deg,hsl(38_36%_94%),hsl(38_28%_84%))] shadow-[0_30px_70px_hsl(var(--moss-deep)/0.35)]">
-              {/* Inner letter peek */}
-              <div className="absolute inset-3 rounded-sm bg-pearl/80" />
-              {/* Monogram */}
-              <div className="absolute inset-0 grid place-items-center">
-                <span className="font-script text-6xl text-moss-deep sm:text-7xl">
-                  G<span className="mx-1 text-copper">&amp;</span>M
-                </span>
+            <div className="relative aspect-[5/3.35] w-full overflow-hidden rounded-sm border border-copper/25 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_32px_80px_hsl(var(--moss-deep)/0.34)] transition-transform duration-700 group-hover:-translate-y-1">
+              <div className="lace-band absolute left-0 right-0 top-0 h-16" />
+              <div className="absolute inset-x-8 top-14 border-t border-copper/25" />
+              <div className="absolute inset-5 top-10 rounded-sm border border-copper/15 bg-pearl/58" />
+              <div className="absolute inset-x-8 top-20 text-center">
+                <p className="font-display text-sm uppercase tracking-[0.36em] text-moss-deep/65">Vestuvinis kvietimas</p>
+                <h1 className="mt-3 font-display text-4xl font-semibold leading-none text-moss-deep sm:text-5xl">
+                  Greta ir Matas
+                </h1>
+                <p className="mt-3 font-body text-sm uppercase tracking-[0.24em] text-copper">spausti ir atverti</p>
               </div>
-              {/* Side lace trim (left & right) */}
-              <div
-                className="pointer-events-none absolute left-0 top-0 h-full w-3"
-                style={{
-                  ...laceEdge,
-                  backgroundSize: "12px 24px",
-                  background:
-                    "radial-gradient(circle at 0 12px, hsl(var(--pearl)) 11px, transparent 12px) repeat-y",
-                }}
-              />
-              <div
-                className="pointer-events-none absolute right-0 top-0 h-full w-3"
-                style={{
-                  background:
-                    "radial-gradient(circle at 12px 12px, hsl(var(--pearl)) 11px, transparent 12px) repeat-y",
-                  backgroundSize: "12px 24px",
-                }}
-              />
+              <div className="absolute bottom-0 left-0 h-1/2 w-full bg-[linear-gradient(32deg,transparent_49%,hsl(var(--copper)/0.18)_50%,transparent_51%),linear-gradient(-32deg,transparent_49%,hsl(var(--copper)/0.18)_50%,transparent_51%)]" />
             </div>
 
-            {/* Top flap (triangle) with lace edge */}
             <div
-              className={`absolute -top-px left-0 right-0 origin-top transition-transform duration-1000 ${
+              className={`absolute -top-px left-0 right-0 z-20 origin-top transition-transform duration-1000 ${
                 opening ? "[transform:rotateX(-180deg)]" : ""
               }`}
               style={{
@@ -129,10 +118,9 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
               }}
             >
               <div
-                className="absolute inset-0 bg-[linear-gradient(180deg,hsl(38_38%_96%),hsl(38_30%_86%))] shadow-[0_4px_14px_hsl(var(--moss-deep)/0.18)]"
+                className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_4px_14px_hsl(var(--moss-deep)/0.18)]"
                 style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
               />
-              {/* Lace scallops along the two diagonal edges */}
               <svg
                 viewBox="0 0 500 170"
                 className="absolute inset-0 h-full w-full"
@@ -143,23 +131,12 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
                     <circle cx="7" cy="2" r="6" fill="hsl(var(--pearl))" />
                   </pattern>
                 </defs>
-                {/* left diagonal */}
                 <path d="M0,0 L250,170 L250,160 L8,-4 Z" fill="url(#scallops)" opacity="0.95" />
-                {/* right diagonal */}
                 <path d="M500,0 L250,170 L250,160 L492,-4 Z" fill="url(#scallops)" opacity="0.95" />
               </svg>
-              {/* monogram on flap */}
-              <div className="absolute inset-x-0 top-2 grid place-items-center">
-                <span className="font-script text-2xl text-moss-deep">G&amp;M</span>
-              </div>
             </div>
           </button>
         </div>
-
-        <p className="mt-8 font-display tracking-[0.5em] text-[11px] uppercase text-moss-deep/70 sm:text-xs">
-          Tap envelope to open
-        </p>
-        <p className="mt-3 font-display italic text-base text-moss-deep/80">{greeting}</p>
       </div>
     </div>
   );
