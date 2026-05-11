@@ -77,7 +77,6 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
           <p className="mt-6 leading-8 text-muted-foreground">
             Atsakymo lauksime iki <strong className="font-semibold text-moss-deep">2026 m. liepos 6 d.</strong> Po šios datos registracija užsidarys.
           </p>
-          {guest && <p className="mt-6 font-display text-3xl text-moss">{guest.greeting}</p>}
         </div>
 
         <form onSubmit={submit} className="paper-grain relative grid gap-5 border border-copper/25 bg-pearl p-6 shadow-[0_28px_70px_hsl(var(--moss-deep)/0.14)] sm:p-8">
