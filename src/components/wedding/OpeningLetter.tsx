@@ -5,14 +5,6 @@ type OpeningLetterProps = {
   onOpen: () => void;
 };
 
-// Scalloped lace edge generator — repeated half-circles
-const laceEdge = {
-  background:
-    "radial-gradient(circle at 12px 0, hsl(var(--pearl)) 11px, transparent 12px) repeat-x",
-  backgroundSize: "24px 12px",
-  filter: "drop-shadow(0 1px 0 hsl(var(--copper)/0.25))",
-};
-
 export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
   const [opening, setOpening] = useState(false);
 
