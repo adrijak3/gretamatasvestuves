@@ -54,15 +54,7 @@ export const AdminPanel = () => {
   const [editing, setEditing] = useState(emptyGuest);
   const [loading, setLoading] = useState(false);
 
-  const [baseUrl, setBaseUrl] = useState(
-    () => localStorage.getItem("wedding-base-url") || (typeof window !== "undefined" ? window.location.origin + "/" : "")
-  );
-
-  const updateBaseUrl = (value: string) => {
-    const cleaned = value.trim().replace(/\/+$/, "") + "/";
-    setBaseUrl(cleaned);
-    localStorage.setItem("wedding-base-url", cleaned);
-  };
+  const baseUrl = "https://gretamatasvestuves.lovable.app/";
 
   const load = async (activeToken = token) => {
     if (!activeToken) return;
@@ -134,12 +126,12 @@ export const AdminPanel = () => {
   };
 
   const copyLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}`);
+    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}`);
     toast.success("Nuoroda nukopijuota.");
   };
 
   const copyRsvpLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}#rsvp`);
+    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}#rsvp`);
     toast.success("RSVP nuoroda nukopijuota.");
   };
 
@@ -196,21 +188,13 @@ export const AdminPanel = () => {
                 <div className="grid gap-6">
                   <div>
                     <h3 className="font-display text-3xl text-moss-deep">Svečių nuorodos</h3>
-                    <label className="mt-3 grid gap-1 text-xs uppercase tracking-widest text-muted-foreground">
-                      Bazinis adresas (nuorodų prefiksas)
-                      <input
-                        value={baseUrl}
-                        onChange={(e) => updateBaseUrl(e.target.value)}
-                        placeholder="https://manodomenas.lt/"
-                        className="border border-input bg-background px-3 py-2 font-body text-sm text-foreground"
-                      />
-                    </label>
+                    <p className="mt-2 text-sm text-muted-foreground">Nuorodos automatiškai kuriamos per publikuotą svetainę.</p>
                     <div className="mt-3 grid max-h-[360px] gap-3 overflow-auto pr-1">
                       {guests.map((guest) => (
                         <div key={guest.id} className="grid gap-3 border border-border bg-vellum p-4 sm:grid-cols-[1fr_auto] sm:items-center">
                           <div className="min-w-0">
                             <p className="truncate font-display text-2xl text-moss-deep">{guest.display_name}</p>
-                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={guest.slug}</p>
+                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={encodeURIComponent(guest.slug)}</p>
                           </div>
                           <div className="flex gap-2">
                             <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>

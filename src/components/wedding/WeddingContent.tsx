@@ -1,13 +1,13 @@
-import { Clock, Gift, HeartHandshake, MapPin, UtensilsCrossed } from "lucide-react";
+import { CakeSlice, Camera, Church, Clock, Gift, HeartHandshake, Leaf, MapPin, Shirt, UtensilsCrossed, Wine } from "lucide-react";
 import { Countdown } from "./Countdown";
 
 const timeline = [
-  { time: "14:40", title: "Atvykimas", emoji: "🌿", text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
-  { time: "15:00", title: "Santuokos ceremonija", emoji: "💍", text: "Šv. Kazimiero bažnyčia, Vilnius. Į bažnytinę dalį kviečiami ir vaikai." },
-  { time: "16:30", title: "Šampano stalelis", emoji: "🥂", text: "Pasveikinimai, šampanas ir lengvi užkandžiai jaukioje aplinkoje." },
-  { time: "17:00", title: "Laisvas laikas (fotosesija)", emoji: "📸", text: "Trumpa pertrauka — laikas jaunųjų fotosesijai, o jums — pasivaikščioti." },
-  { time: "18:00–20:00", title: "Vakarinė dalis", emoji: "🍽️", text: "Restoranas Elven. Vakarienė, tostai ir vakaro pradžia. N20." },
-  { time: "21:00", title: "Šokiai ir tortas", emoji: "🌸", text: "Pirmasis šokis, tortas ir nakties šventė kartu su jumis." },
+  { time: "14:40", title: "Atvykimas", icon: Leaf, text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
+  { time: "15:00", title: "Santuokos ceremonija", icon: Church, text: "Šv. Kazimiero bažnyčia, Vilnius." },
+  { time: "16:30", title: "Šampano stalelis", icon: Wine, text: "Pasveikinimai, šampanas ir lengvi užkandžiai jaukioje aplinkoje." },
+  { time: "17:00", title: "Laisvas laikas (fotosesija)", icon: Camera, text: "Trumpa pertrauka — laikas jaunųjų fotosesijai, o jums — pasivaikščioti." },
+  { time: "18:00–20:00", title: "Vakarinė dalis", icon: UtensilsCrossed, text: "Restoranas Elven. Vakarienė, tostai ir vakaro pradžia. N20." },
+  { time: "21:00", title: "Šokiai ir tortas", icon: CakeSlice, text: "Pirmasis šokis, tortas ir nakties šventė kartu su jumis." },
 ];
 
 const dressColors = [
@@ -35,7 +35,7 @@ export const WeddingContent = () => (
         <p className="font-display text-sm uppercase tracking-[0.32em] text-moss">2026 • 09 • 06</p>
         <div className="mt-8 space-y-6">
           <div className="flex gap-4">
-            <span className="mt-1 text-2xl">⛪</span>
+            <Church className="mt-1 h-6 w-6 text-copper" />
             <div>
               <h3 className="font-display text-3xl text-moss-deep">Šv. Kazimiero bažnyčia</h3>
               <p className="text-muted-foreground">Ceremonija 15:00</p>
@@ -77,7 +77,9 @@ export const WeddingContent = () => (
             <div className={index % 2 ? "sm:col-start-2" : ""}>
               <div className="paper-grain relative overflow-hidden border border-copper/25 bg-vellum p-6 shadow-[0_18px_48px_hsl(var(--moss-deep)/0.12)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_60px_hsl(var(--moss-deep)/0.2)] animate-fade-in-slow">
                 <div className={`flex items-center gap-3 ${index % 2 ? "" : "sm:justify-end"}`}>
-                  <span className="text-3xl">{item.emoji}</span>
+                  <span className="grid h-11 w-11 place-items-center border border-copper/30 bg-pearl text-copper shadow-[0_10px_26px_hsl(var(--moss-deep)/0.12)]">
+                    <item.icon className="h-5 w-5" />
+                  </span>
                   <span className="font-display text-5xl font-semibold text-copper">{item.time}</span>
                 </div>
                 <h3 className="mt-2 font-display text-3xl text-moss-deep">{item.title}</h3>
@@ -93,7 +95,7 @@ export const WeddingContent = () => (
     <section id="details" className="bg-moss-deep py-20 text-primary-foreground">
       <div className="container mx-auto grid gap-5 px-6 md:grid-cols-3">
         <article className="border border-pearl/15 bg-pearl/10 p-6 backdrop-blur animate-fade-in hover:bg-pearl/20 hover:-translate-y-1 transition-all duration-300">
-          <span className="text-3xl">👗</span>
+          <Shirt className="h-7 w-7 text-copper-glow" />
           <h3 className="mt-5 font-display text-3xl">Aprangos kodas</h3>
           <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai ar švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
           <div className="mt-5 flex flex-wrap gap-2">

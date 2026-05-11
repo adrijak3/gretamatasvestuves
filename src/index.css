@@ -155,6 +155,42 @@
   .flow-line {
     background-image: linear-gradient(180deg, hsl(var(--copper) / 0), hsl(var(--copper) / 0.75), hsl(var(--copper) / 0));
   }
+
+  .lace-band {
+    background-image:
+      radial-gradient(circle at 12px 100%, transparent 9px, hsl(var(--pearl) / 0.96) 10px 14px, transparent 15px),
+      radial-gradient(circle at 12px 0, hsl(var(--moss-deep) / 0.13) 1px, transparent 2px),
+      linear-gradient(90deg, transparent 0 10px, hsl(var(--copper) / 0.2) 10px 11px, transparent 11px 24px),
+      linear-gradient(180deg, hsl(var(--pearl)), hsl(var(--vellum)));
+    background-size: 24px 18px, 24px 14px, 24px 100%, 100% 100%;
+    background-position: 0 100%, 0 12px, 0 0, 0 0;
+    background-repeat: repeat-x, repeat, repeat, no-repeat;
+  }
+
+  .lace-heart-invite {
+    opacity: 0;
+    transform: translate(-50%, 42%) scale(0.72) rotate(-2deg);
+    filter: drop-shadow(0 22px 38px hsl(var(--moss-deep) / 0.22));
+  }
+
+  .lace-heart-invite.is-open {
+    animation: heart-letter-pop 2.55s 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes heart-letter-pop {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 42%) scale(0.72) rotate(-2deg);
+    }
+    40% {
+      opacity: 1;
+      transform: translate(-50%, -22%) scale(1.04) rotate(1deg);
+    }
+    72%, 100% {
+      opacity: 1;
+      transform: translate(-50%, -18%) scale(1) rotate(0deg);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
