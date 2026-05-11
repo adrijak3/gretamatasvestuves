@@ -54,7 +54,15 @@ export const AdminPanel = () => {
   const [editing, setEditing] = useState(emptyGuest);
   const [loading, setLoading] = useState(false);
 
-  const baseUrl = useMemo(() => "https://gretamatasvestuves.lovable.app/", []);
+  const [baseUrl, setBaseUrl] = useState(
+    () => localStorage.getItem("wedding-base-url") || (typeof window !== "undefined" ? window.location.origin + "/" : "")
+  );
+
+  const updateBaseUrl = (value: string) => {
+    const cleaned = value.trim().replace(/\/+$/, "") + "/";
+    setBaseUrl(cleaned);
+    localStorage.setItem("wedding-base-url", cleaned);
+  };
 
   const load = async (activeToken = token) => {
     if (!activeToken) return;
@@ -188,6 +196,15 @@ export const AdminPanel = () => {
                 <div className="grid gap-6">
                   <div>
                     <h3 className="font-display text-3xl text-moss-deep">Svečių nuorodos</h3>
+                    <label className="mt-3 grid gap-1 text-xs uppercase tracking-widest text-muted-foreground">
+                      Bazinis adresas (nuorodų prefiksas)
+                      <input
+                        value={baseUrl}
+                        onChange={(e) => updateBaseUrl(e.target.value)}
+                        placeholder="https://manodomenas.lt/"
+                        className="border border-input bg-background px-3 py-2 font-body text-sm text-foreground"
+                      />
+                    </label>
                     <div className="mt-3 grid max-h-[360px] gap-3 overflow-auto pr-1">
                       {guests.map((guest) => (
                         <div key={guest.id} className="grid gap-3 border border-border bg-vellum p-4 sm:grid-cols-[1fr_auto] sm:items-center">
