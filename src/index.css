@@ -174,7 +174,7 @@
   }
 
   .lace-heart-invite.is-open {
-    animation: heart-letter-pop 1.45s 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: heart-letter-pop 2.55s 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @keyframes heart-letter-pop {
@@ -182,11 +182,11 @@
       opacity: 0;
       transform: translate(-50%, 42%) scale(0.72) rotate(-2deg);
     }
-    58% {
+    40% {
       opacity: 1;
       transform: translate(-50%, -22%) scale(1.04) rotate(1deg);
     }
-    100% {
+    72%, 100% {
       opacity: 1;
       transform: translate(-50%, -18%) scale(1) rotate(0deg);
     }
