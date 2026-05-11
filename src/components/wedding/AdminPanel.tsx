@@ -55,7 +55,7 @@ export const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
 
   const [baseUrl, setBaseUrl] = useState(
-    () => localStorage.getItem("wedding-base-url") || (typeof window !== "undefined" ? window.location.origin + "/" : "")
+    () => localStorage.getItem("wedding-base-url") || "https://gretamatasvestuves.lovable.app/"
   );
 
   const updateBaseUrl = (value: string) => {
@@ -134,12 +134,12 @@ export const AdminPanel = () => {
   };
 
   const copyLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}`);
+    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}`);
     toast.success("Nuoroda nukopijuota.");
   };
 
   const copyRsvpLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${slug}#rsvp`);
+    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}#rsvp`);
     toast.success("RSVP nuoroda nukopijuota.");
   };
 
@@ -210,7 +210,7 @@ export const AdminPanel = () => {
                         <div key={guest.id} className="grid gap-3 border border-border bg-vellum p-4 sm:grid-cols-[1fr_auto] sm:items-center">
                           <div className="min-w-0">
                             <p className="truncate font-display text-2xl text-moss-deep">{guest.display_name}</p>
-                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={guest.slug}</p>
+                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={encodeURIComponent(guest.slug)}</p>
                           </div>
                           <div className="flex gap-2">
                             <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
