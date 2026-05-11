@@ -29,11 +29,12 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
       }`}
       style={{
         transitionDelay: opening ? "1.65s" : "0s",
+        backgroundColor: "hsl(var(--background))",
         backgroundImage: [
-          "radial-gradient(circle at 18% 18%, hsl(var(--moss-soft) / 0.65), transparent 28rem)",
-          "radial-gradient(circle at 82% 24%, hsl(var(--copper) / 0.18), transparent 28rem)",
-          "radial-gradient(circle at 25% 85%, hsl(var(--moss) / 0.34), transparent 34rem)",
-          "linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary) / 0.7))",
+          "radial-gradient(circle at 18% 18%, hsl(var(--moss-soft) / 0.55), transparent 28rem)",
+          "radial-gradient(circle at 82% 24%, hsl(var(--copper) / 0.12), transparent 28rem)",
+          "radial-gradient(circle at 25% 85%, hsl(var(--moss) / 0.28), transparent 34rem)",
+          "linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)))",
         ].join(","),
       }}
     >
@@ -46,8 +47,11 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
       </div>
 
       <div className="relative w-full max-w-[560px] text-center animate-scale-in">
+        <p className="mb-7 font-display text-xs uppercase tracking-[0.42em] text-moss-deep/70 sm:text-sm">
+          Atverkite kvietimą
+        </p>
         <div
-          className="relative mx-auto w-full max-w-[470px] pb-8 pt-28 sm:pt-36"
+          className="relative mx-auto w-full max-w-[470px] pb-8 pt-24 sm:pt-36"
           style={{ perspective: "1400px" }}
         >
           <div
@@ -95,6 +99,7 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
           >
             <div className="relative aspect-[5/3.35] w-full overflow-hidden rounded-sm border border-copper/25 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_32px_80px_hsl(var(--moss-deep)/0.34)] transition-transform duration-700 group-hover:-translate-y-1">
               <div className="lace-band absolute left-0 right-0 top-0 h-16" />
+              <div className="lace-band absolute bottom-0 left-0 right-0 h-12 rotate-180 opacity-80" />
               <div className="absolute inset-x-8 top-14 border-t border-copper/25" />
               <div className="absolute inset-5 top-10 rounded-sm border border-copper/15 bg-pearl/58" />
               <div className="absolute inset-x-8 top-20 text-center">
