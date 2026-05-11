@@ -19,7 +19,7 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
   const handleOpen = () => {
     if (opening) return;
     setOpening(true);
-    setTimeout(() => onOpen(), 2300);
+    setTimeout(() => onOpen(), 3600);
   };
 
   return (
@@ -28,7 +28,7 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
         opening ? "opacity-0" : "opacity-100"
       }`}
       style={{
-        transitionDelay: opening ? "1.65s" : "0s",
+        transitionDelay: opening ? "2.9s" : "0s",
         backgroundColor: "hsl(var(--background))",
         backgroundImage: [
           "radial-gradient(circle at 18% 18%, hsl(var(--moss-soft) / 0.55), transparent 28rem)",
@@ -102,7 +102,7 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
               <div className="lace-band absolute bottom-0 left-0 right-0 h-12 rotate-180 opacity-80" />
               <div className="absolute inset-x-8 top-14 border-t border-copper/25" />
               <div className="absolute inset-5 top-10 rounded-sm border border-copper/15 bg-pearl/58" />
-              <div className="absolute inset-x-8 top-20 text-center">
+              <div className="absolute inset-x-8 top-20 z-30 text-center">
                 <p className="font-display text-sm uppercase tracking-[0.36em] text-moss-deep/65">Vestuvinis kvietimas</p>
                 <h1 className="mt-3 font-display text-4xl font-semibold leading-none text-moss-deep sm:text-5xl">
                   Greta ir Matas
