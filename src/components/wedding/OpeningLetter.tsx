@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 type OpeningLetterProps = {
   greeting: string;
   onOpen: () => void;
+};
+
+// Scalloped lace edge generator — repeated half-circles
+const laceEdge = {
+  background:
+    "radial-gradient(circle at 12px 0, hsl(var(--pearl)) 11px, transparent 12px) repeat-x",
+  backgroundSize: "24px 12px",
+  filter: "drop-shadow(0 1px 0 hsl(var(--copper)/0.25))",
 };
 
 export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
@@ -12,109 +19,147 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
   const handleOpen = () => {
     if (opening) return;
     setOpening(true);
-    // Wait for flap + letter rise animation before unmounting
-    setTimeout(() => onOpen(), 1900);
+    setTimeout(() => onOpen(), 1700);
   };
 
   return (
     <div
-      className={`fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-moss-deep px-4 py-8 text-primary-foreground transition-opacity duration-500 ${
+      className={`fixed inset-0 z-50 grid place-items-center overflow-y-auto px-4 py-10 text-foreground transition-opacity duration-500 ${
         opening ? "opacity-0" : "opacity-100"
       }`}
-      style={{ transitionDelay: opening ? "1.4s" : "0s" }}
+      style={{
+        transitionDelay: opening ? "1.2s" : "0s",
+        backgroundImage: [
+          "radial-gradient(circle at 14% 18%, hsl(340 45% 78% / 0.55), transparent 30rem)",
+          "radial-gradient(circle at 82% 22%, hsl(28 55% 80% / 0.55), transparent 28rem)",
+          "radial-gradient(circle at 18% 82%, hsl(95 28% 60% / 0.45), transparent 32rem)",
+          "radial-gradient(circle at 86% 78%, hsl(355 50% 82% / 0.5), transparent 30rem)",
+          "linear-gradient(135deg, hsl(38 38% 92%), hsl(28 32% 86%))",
+        ].join(","),
+      }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,hsl(var(--copper-glow)/0.2),transparent_42rem)]" />
-
-      {/* Translucent watermark initials & date */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center select-none">
-        <span className="font-display text-[34vw] sm:text-[22vw] font-light leading-none text-pearl/[0.05] tracking-tight animate-float">
-          G<span className="font-script align-middle mx-2">&amp;</span>M
-        </span>
-        <span className="mt-4 font-display text-base sm:text-xl uppercase tracking-[0.6em] text-pearl/10">
-          2026 · 09 · 06
-        </span>
-      </div>
-
-      <div
-        className="relative w-full max-w-[560px] animate-scale-in"
-        style={{ perspective: "1400px" }}
-      >
-        {/* Envelope body */}
-        <div className="relative">
-          {/* Back panel */}
-          <div className="absolute -inset-x-4 -top-2 -bottom-3 bg-[linear-gradient(180deg,hsl(var(--vellum)),hsl(38_30%_84%))] shadow-[0_30px_80px_hsl(var(--moss-deep)/0.5)]" />
-
-          {/* Letter rises out of envelope */}
-          <div
-            className={`paper-grain relative mt-20 overflow-hidden border border-copper/40 bg-vellum px-6 py-10 text-center text-foreground shadow-[0_18px_50px_hsl(var(--moss-deep)/0.35)] sm:px-12 sm:py-14 ${
-              opening ? "animate-letter-rise" : "animate-fade-in-slow"
-            }`}
-          >
-            <p className="font-display text-[10px] uppercase tracking-[0.55em] text-copper sm:text-xs animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Kvietimas
-            </p>
-            <div className="mx-auto mt-3 h-px w-12 bg-copper/50" />
-
-            <p className="mt-6 font-display italic text-2xl text-moss-deep sm:text-3xl animate-fade-in" style={{ animationDelay: "0.5s" }}>
-              {greeting}
-            </p>
-
-            <p className="mt-5 font-display italic text-base leading-7 text-muted-foreground sm:text-lg animate-fade-in" style={{ animationDelay: "0.7s" }}>
-              su didžiausiu džiaugsmu kviečiame Jus<br />dalyvauti mūsų santuokos šventėje
-            </p>
-
-            <h1 className="mt-7 font-display text-4xl font-light tracking-[0.06em] text-moss-deep sm:text-5xl animate-fade-in" style={{ animationDelay: "0.9s" }}>
-              Matas <span className="font-script text-copper text-5xl sm:text-6xl align-middle">&amp;</span> Greta
-            </h1>
-
-            <div className="mx-auto mt-6 flex items-center justify-center gap-3 text-moss animate-fade-in" style={{ animationDelay: "1.1s" }}>
-              <span className="h-px w-8 bg-moss/40" />
-              <p className="font-display text-xs uppercase tracking-[0.4em] sm:text-sm">2026 · 09 · 06</p>
-              <span className="h-px w-8 bg-moss/40" />
-            </div>
-
-            <div className="animate-fade-in" style={{ animationDelay: "1.3s" }}>
-              <button
-                type="button"
-                onClick={handleOpen}
-                disabled={opening}
-                className="copper-seal relative z-10 mx-auto mt-9 grid h-20 w-20 place-items-center rounded-full font-display italic text-xl text-copper-foreground transition-transform duration-300 hover:scale-110 active:scale-95 animate-seal sm:h-24 sm:w-24"
-                aria-label="Atidaryti kvietimą"
-              >
-                <span>M&amp;G</span>
-                <span className="absolute inset-2 rounded-full border border-pearl/40" />
-              </button>
-
-              <Button
-                type="button"
-                variant="moss"
-                className="relative z-10 mt-5 hover:scale-105 transition-transform"
-                onClick={handleOpen}
-                disabled={opening}
-              >
-                Atverti kvietimą
-              </Button>
-            </div>
-          </div>
-
-          {/* Envelope flap (opens upward) */}
-          <div
-            className={`absolute -inset-x-4 -top-2 h-32 origin-top bg-[linear-gradient(180deg,hsl(38_36%_92%),hsl(38_30%_82%))] shadow-[0_4px_12px_hsl(var(--moss-deep)/0.2)] z-20 ${
-              opening ? "animate-flap-open" : ""
-            }`}
+      {/* Drifting petal flecks */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute block h-3 w-3 rounded-full bg-pearl/60 blur-[2px] animate-float"
             style={{
-              clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
+              left: `${(i * 7.3) % 100}%`,
+              top: `${(i * 11.7) % 100}%`,
+              animationDelay: `${i * 0.4}s`,
+              animationDuration: `${5 + (i % 4)}s`,
             }}
           />
-          {/* Wax seal on flap centerline */}
-          {!opening && (
-            <div className="absolute left-1/2 top-[110px] z-30 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full copper-seal grid place-items-center text-[10px] font-display italic text-copper-foreground">
-              <span>M&amp;G</span>
+        ))}
+      </div>
+
+      {/* Right-side date column (sviesoforas) — desktop only */}
+      <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 select-none flex-col items-center gap-6 lg:flex">
+        {["26", "09", "06"].map((n, i) => (
+          <div
+            key={i}
+            className="grid h-24 w-24 place-items-center rounded-full border border-copper/40 bg-pearl/70 font-display text-4xl font-light tracking-wide text-moss-deep shadow-[0_8px_30px_hsl(var(--moss-deep)/0.18)] backdrop-blur"
+            style={{ animation: `float 4s ease-in-out ${i * 0.3}s infinite` }}
+          >
+            {n}
+          </div>
+        ))}
+      </div>
+
+      <div className="relative w-full max-w-[520px] text-center animate-scale-in">
+        <p className="font-display italic tracking-[0.35em] text-xs uppercase text-moss-deep/70 sm:text-sm">
+          You&apos;ve got mail from
+        </p>
+        <h1 className="mt-3 font-script text-5xl leading-[1.05] text-moss-deep sm:text-6xl">
+          Greta &amp; Matas
+        </h1>
+
+        {/* Envelope */}
+        <div
+          className="relative mx-auto mt-10 w-full max-w-[440px]"
+          style={{ perspective: "1400px" }}
+        >
+          <button
+            type="button"
+            onClick={handleOpen}
+            disabled={opening}
+            aria-label="Atverti voką"
+            className="group relative block w-full"
+          >
+            {/* Envelope body */}
+            <div className="relative aspect-[5/3.4] w-full overflow-hidden rounded-sm bg-[linear-gradient(180deg,hsl(38_36%_94%),hsl(38_28%_84%))] shadow-[0_30px_70px_hsl(var(--moss-deep)/0.35)]">
+              {/* Inner letter peek */}
+              <div className="absolute inset-3 rounded-sm bg-pearl/80" />
+              {/* Monogram */}
+              <div className="absolute inset-0 grid place-items-center">
+                <span className="font-script text-6xl text-moss-deep sm:text-7xl">
+                  G<span className="mx-1 text-copper">&amp;</span>M
+                </span>
+              </div>
+              {/* Side lace trim (left & right) */}
+              <div
+                className="pointer-events-none absolute left-0 top-0 h-full w-3"
+                style={{
+                  ...laceEdge,
+                  backgroundSize: "12px 24px",
+                  background:
+                    "radial-gradient(circle at 0 12px, hsl(var(--pearl)) 11px, transparent 12px) repeat-y",
+                }}
+              />
+              <div
+                className="pointer-events-none absolute right-0 top-0 h-full w-3"
+                style={{
+                  background:
+                    "radial-gradient(circle at 12px 12px, hsl(var(--pearl)) 11px, transparent 12px) repeat-y",
+                  backgroundSize: "12px 24px",
+                }}
+              />
             </div>
-          )}
+
+            {/* Top flap (triangle) with lace edge */}
+            <div
+              className={`absolute -top-px left-0 right-0 origin-top transition-transform duration-1000 ${
+                opening ? "[transform:rotateX(-180deg)]" : ""
+              }`}
+              style={{
+                transformStyle: "preserve-3d",
+                backfaceVisibility: "hidden",
+                aspectRatio: "5 / 1.7",
+              }}
+            >
+              <div
+                className="absolute inset-0 bg-[linear-gradient(180deg,hsl(38_38%_96%),hsl(38_30%_86%))] shadow-[0_4px_14px_hsl(var(--moss-deep)/0.18)]"
+                style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+              />
+              {/* Lace scallops along the two diagonal edges */}
+              <svg
+                viewBox="0 0 500 170"
+                className="absolute inset-0 h-full w-full"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <pattern id="scallops" x="0" y="0" width="14" height="10" patternUnits="userSpaceOnUse">
+                    <circle cx="7" cy="2" r="6" fill="hsl(var(--pearl))" />
+                  </pattern>
+                </defs>
+                {/* left diagonal */}
+                <path d="M0,0 L250,170 L250,160 L8,-4 Z" fill="url(#scallops)" opacity="0.95" />
+                {/* right diagonal */}
+                <path d="M500,0 L250,170 L250,160 L492,-4 Z" fill="url(#scallops)" opacity="0.95" />
+              </svg>
+              {/* monogram on flap */}
+              <div className="absolute inset-x-0 top-2 grid place-items-center">
+                <span className="font-script text-2xl text-moss-deep">G&amp;M</span>
+              </div>
+            </div>
+          </button>
         </div>
+
+        <p className="mt-8 font-display tracking-[0.5em] text-[11px] uppercase text-moss-deep/70 sm:text-xs">
+          Tap envelope to open
+        </p>
+        <p className="mt-3 font-display italic text-base text-moss-deep/80">{greeting}</p>
       </div>
     </div>
   );

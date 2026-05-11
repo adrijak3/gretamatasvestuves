@@ -25,7 +25,7 @@ export const Countdown = () => {
     <section id="countdown" className="relative overflow-hidden border-y border-copper/20 bg-moss-deep py-16 text-primary-foreground">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-copper to-transparent" />
       <div className="container relative mx-auto px-6 text-center">
-        <p className="font-display italic text-3xl text-copper-glow sm:text-4xl tracking-[0.2em] uppercase">Iki mūsų dienos</p>
+        <p className="font-display italic text-3xl text-copper-glow sm:text-4xl tracking-[0.2em] uppercase">Skaičiuojame akimirkas</p>
         <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
           {entries.map(([label, value]) => (
             <div key={label} className="paper-grain overflow-hidden border border-pearl/20 bg-pearl/10 p-5 backdrop-blur-sm transition-transform hover:-translate-y-1">
