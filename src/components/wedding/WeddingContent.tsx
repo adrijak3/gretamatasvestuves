@@ -1,10 +1,13 @@
-import { Church, Clock, Gift, HeartHandshake, MapPin, Moon, Shirt, Sparkles } from "lucide-react";
+import { Clock, Gift, HeartHandshake, MapPin, UtensilsCrossed } from "lucide-react";
 import { Countdown } from "./Countdown";
 
 const timeline = [
-  { time: "14:40", title: "Atvykimas", text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
-  { time: "15:00", title: "Santuokos ceremonija", text: "Šv. Kazimiero bažnyčia, Vilnius. Į bažnytinę dalį kviečiami ir vaikai." },
-  { time: "18:00", title: "Vakarinė dalis", text: "Restoranas Elven, L. Stuokos-Gucevičiaus g. Vakarinė dalis — tik suaugusiems, N20." },
+  { time: "14:40", title: "Atvykimas", emoji: "🌿", text: "Prašome atvykti 15–20 min. anksčiau, kad galėtume ramiai pradėti ceremoniją." },
+  { time: "15:00", title: "Santuokos ceremonija", emoji: "💍", text: "Šv. Kazimiero bažnyčia, Vilnius. Į bažnytinę dalį kviečiami ir vaikai." },
+  { time: "16:30", title: "Šampano stalelis", emoji: "🥂", text: "Pasveikinimai, šampanas ir lengvi užkandžiai jaukioje aplinkoje." },
+  { time: "17:00", title: "Laisvas laikas (fotosesija)", emoji: "📸", text: "Trumpa pertrauka — laikas jaunųjų fotosesijai, o jums — pasivaikščioti." },
+  { time: "18:00–20:00", title: "Vakarinė dalis", emoji: "🍽️", text: "Restoranas Elven. Vakarienė, tostai ir vakaro pradžia. N20." },
+  { time: "21:00", title: "Šokiai ir tortas", emoji: "🌸", text: "Pirmasis šokis, tortas ir nakties šventė kartu su jumis." },
 ];
 
 const dressColors = [
@@ -21,10 +24,10 @@ export const WeddingContent = () => (
       <div className="animate-reveal">
         <p className="font-display italic text-3xl text-copper sm:text-4xl">Kviečiame švęsti kartu</p>
         <h2 className="mt-3 max-w-3xl font-display text-6xl font-semibold leading-[0.88] text-moss-deep sm:text-7xl lg:text-8xl">
-          Matas <span className="font-script text-copper">&amp;</span> Greta
+          Greta &amp; Matas
         </h2>
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-          Rugsėjo 6 dieną norime būti apsupti žmonių, kurie mums brangūs. Lauksime Tavęs elegantiškoje, šiltoje ir labai mūsų šventėje.
+          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir labai mūsų šventėje.
         </p>
       </div>
       <div className="paper-grain relative overflow-hidden border border-copper/30 bg-vellum p-7 animate-fade-in-slow hover:shadow-[0_36px_90px_hsl(var(--moss-deep)/0.25)] transition-shadow duration-500 shadow-[0_30px_80px_hsl(var(--moss-deep)/0.18)]">
@@ -32,17 +35,17 @@ export const WeddingContent = () => (
         <p className="font-display text-sm uppercase tracking-[0.32em] text-moss">2026 • 09 • 06</p>
         <div className="mt-8 space-y-6">
           <div className="flex gap-4">
-            <Church className="mt-1 h-6 w-6 text-copper" />
+            <span className="mt-1 text-2xl">⛪</span>
             <div>
               <h3 className="font-display text-3xl text-moss-deep">Šv. Kazimiero bažnyčia</h3>
-              <p className="text-muted-foreground">Ceremonija 15:00 • atvykti 14:40–14:45</p>
+              <p className="text-muted-foreground">Ceremonija 15:00</p>
             </div>
           </div>
           <div className="flex gap-4">
-            <Moon className="mt-1 h-6 w-6 text-copper" />
+            <UtensilsCrossed className="mt-1 h-6 w-6 text-copper" />
             <div>
               <h3 className="font-display text-3xl text-moss-deep">Restoranas Elven</h3>
-              <p className="text-muted-foreground">Vakarinė dalis 18:00 • L. Stuokos-Gucevičiaus g.</p>
+              <p className="text-muted-foreground">Vakarinė dalis 18:00</p>
             </div>
           </div>
         </div>
@@ -57,12 +60,26 @@ export const WeddingContent = () => (
         <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
-        <div className="flow-line absolute left-6 top-0 h-full w-px sm:left-1/2" />
+        {/* dotted pathway connecting all program steps */}
+        <div
+          className="absolute left-6 top-0 h-full w-px sm:left-1/2"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(to bottom, hsl(var(--copper)/0.7) 0 8px, transparent 8px 16px)",
+          }}
+        />
         {timeline.map((item, index) => (
-          <div key={item.time} className={`relative mb-10 grid gap-6 sm:grid-cols-2 ${index % 2 ? "sm:text-left" : "sm:text-right"}`}>
+          <div
+            key={item.title}
+            className={`relative mb-10 grid gap-6 sm:grid-cols-2 ${index % 2 ? "sm:text-left" : "sm:text-right"}`}
+            style={{ animationDelay: `${index * 0.12}s` }}
+          >
             <div className={index % 2 ? "sm:col-start-2" : ""}>
-              <div className="paper-grain relative overflow-hidden border border-copper/25 bg-vellum p-6 shadow-[0_18px_48px_hsl(var(--moss-deep)/0.12)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_60px_hsl(var(--moss-deep)/0.2)] animate-fade-in">
-                <span className="font-display text-5xl font-semibold text-copper">{item.time}</span>
+              <div className="paper-grain relative overflow-hidden border border-copper/25 bg-vellum p-6 shadow-[0_18px_48px_hsl(var(--moss-deep)/0.12)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_60px_hsl(var(--moss-deep)/0.2)] animate-fade-in-slow">
+                <div className={`flex items-center gap-3 ${index % 2 ? "" : "sm:justify-end"}`}>
+                  <span className="text-3xl">{item.emoji}</span>
+                  <span className="font-display text-5xl font-semibold text-copper">{item.time}</span>
+                </div>
                 <h3 className="mt-2 font-display text-3xl text-moss-deep">{item.title}</h3>
                 <p className="mt-3 leading-7 text-muted-foreground">{item.text}</p>
               </div>
@@ -74,9 +91,9 @@ export const WeddingContent = () => (
     </section>
 
     <section id="details" className="bg-moss-deep py-20 text-primary-foreground">
-      <div className="container mx-auto grid gap-5 px-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container mx-auto grid gap-5 px-6 md:grid-cols-3">
         <article className="border border-pearl/15 bg-pearl/10 p-6 backdrop-blur animate-fade-in hover:bg-pearl/20 hover:-translate-y-1 transition-all duration-300">
-          <Shirt className="h-7 w-7 text-copper-glow" />
+          <span className="text-3xl">👗</span>
           <h3 className="mt-5 font-display text-3xl">Aprangos kodas</h3>
           <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai ar švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -95,18 +112,13 @@ export const WeddingContent = () => (
           <h3 className="mt-5 font-display text-3xl">Dalyvavimas</h3>
           <p className="mt-3 text-pearl/75">Atsakymo lauksime iki liepos 6 d. Po šios datos registracija užsidarys.</p>
         </article>
-        <article className="border border-pearl/15 bg-pearl/10 p-6 backdrop-blur animate-fade-in hover:bg-pearl/20 hover:-translate-y-1 transition-all duration-300">
-          <Sparkles className="h-7 w-7 text-copper-glow" />
-          <h3 className="mt-5 font-display text-3xl">Vaikai</h3>
-          <p className="mt-3 text-pearl/75">Vaikai laukiami bažnytinėje ceremonijoje. Vakarinė dalis restorane — tik suaugusiems.</p>
-        </article>
       </div>
     </section>
 
     <section id="map" className="container mx-auto grid gap-8 px-6 py-20 lg:grid-cols-2">
       <div>
         <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Vietos</p>
-        <h2 className="font-display text-5xl font-semibold text-moss-deep">Kur susitinkame</h2>
+        <h2 className="font-display text-5xl font-semibold text-moss-deep">Susitinkame</h2>
       </div>
       <div className="grid gap-4">
         <a className="group border border-border bg-vellum p-6 transition-all duration-300 hover:border-copper hover:-translate-y-1 hover:shadow-[0_18px_40px_hsl(var(--moss-deep)/0.15)] animate-fade-in" href="https://www.google.com/maps/search/?api=1&query=%C5%A0v.+Kazimiero+ba%C5%BEny%C4%8Dia+Vilnius" target="_blank" rel="noreferrer">
@@ -115,10 +127,10 @@ export const WeddingContent = () => (
           <p className="text-muted-foreground">Didžioji g. 34, Vilnius</p>
           <p className="mt-2 text-sm uppercase tracking-[0.2em] text-copper">Atidaryti žemėlapyje →</p>
         </a>
-        <a className="group border border-border bg-vellum p-6 transition-all duration-300 hover:border-copper hover:-translate-y-1 hover:shadow-[0_18px_40px_hsl(var(--moss-deep)/0.15)] animate-fade-in" href="https://www.google.com/maps/search/?api=1&query=Elven+restoranas+Vilnius" target="_blank" rel="noreferrer">
-          <MapPin className="h-6 w-6 text-copper" />
+        <a className="group border border-border bg-vellum p-6 transition-all duration-300 hover:border-copper hover:-translate-y-1 hover:shadow-[0_18px_40px_hsl(var(--moss-deep)/0.15)] animate-fade-in" href="https://www.google.com/maps/search/?api=1&query=Elven+restoranas+L.+Stuokos-Guceviciaus+9-1+Vilnius" target="_blank" rel="noreferrer">
+          <UtensilsCrossed className="h-6 w-6 text-copper" />
           <h3 className="mt-3 font-display text-3xl text-moss-deep group-hover:text-copper">Restoranas Elven</h3>
-          <p className="text-muted-foreground">L. Stuokos-Gucevičiaus g., Vilnius</p>
+          <p className="text-muted-foreground">L. Stuokos-Gucevičiaus g. 9-1, Vilnius</p>
           <p className="mt-2 text-sm uppercase tracking-[0.2em] text-copper">Atidaryti žemėlapyje →</p>
         </a>
       </div>
@@ -131,7 +143,6 @@ export const WeddingContent = () => (
           {[
             ["Kada atvykti?", "Į santuokos ceremoniją prašome atvykti 15–20 min. anksčiau."],
             ["Ar galima su vaikais?", "Į bažnyčią — taip, į vakarinę dalį restorane — ne, vakaras skirtas suaugusiems."],
-            ["Koks aprangos kodas?", "Žiūrėkite aprangos spalvas aukščiau: moterims ilgos suknelės, vyrams kostiumai arba švarkai."],
             ["Iki kada atsakyti?", "Dalyvavimą prašome patvirtinti iki liepos 6 d."],
           ].map(([question, answer]) => (
             <details key={question} className="group p-5">
