@@ -178,8 +178,10 @@ export const AdminPanel = () => {
                   <input placeholder="Nuorodos kodas" value={editing.slug} onChange={(event) => setEditing({ ...editing, slug: makeSlug(event.target.value) })} className="border border-input bg-background px-4 py-3 text-foreground" required />
                   <input placeholder="Antro svečio vardas, jei yra" value={editing.partner_name ?? ""} onChange={(event) => setEditing({ ...editing, partner_name: event.target.value, party_size: event.target.value ? 2 : editing.party_size })} className="border border-input bg-background px-4 py-3 text-foreground" />
                   <select value={editing.party_size} onChange={(event) => setEditing({ ...editing, party_size: Number(event.target.value) })} className="border border-input bg-background px-4 py-3 text-foreground">
-                    <option value={1}>Vienas asmuo</option>
-                    <option value={2}>Pora / du asmenys</option>
+                    <option value={1}>1 asmuo</option>
+                    <option value={2}>2 asmenys</option>
+                    <option value={3}>3 asmenys</option>
+                    <option value={4}>4 asmenys</option>
                   </select>
                   <textarea placeholder="Pastabos" value={editing.notes ?? ""} onChange={(event) => setEditing({ ...editing, notes: event.target.value })} className="border border-input bg-background px-4 py-3 text-foreground" />
                   <Button type="submit" variant="moss" disabled={loading}>{loading ? "Saugoma..." : "Išsaugoti"}</Button>

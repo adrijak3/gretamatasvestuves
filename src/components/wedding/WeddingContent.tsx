@@ -27,7 +27,7 @@ export const WeddingContent = () => (
           Greta &amp; Matas
         </h2>
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir labai mūsų šventėje.
+          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir mūsų šventėje.
         </p>
       </div>
       <div className="paper-grain relative overflow-hidden border border-copper/30 bg-vellum p-7 animate-fade-in-slow hover:shadow-[0_36px_90px_hsl(var(--moss-deep)/0.25)] transition-shadow duration-500 shadow-[0_30px_80px_hsl(var(--moss-deep)/0.18)]">
@@ -60,35 +60,51 @@ export const WeddingContent = () => (
         <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
-        {/* dotted pathway connecting all program steps */}
+        {/* flowing curved pathway */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 100 1000"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-32 -translate-x-1/2 sm:block"
+        >
+          <path
+            d="M50 0 C 10 120, 90 240, 50 360 S 10 600, 50 720 S 90 920, 50 1000"
+            fill="none"
+            stroke="hsl(var(--copper) / 0.55)"
+            strokeWidth="1.5"
+            strokeDasharray="2 10"
+            strokeLinecap="round"
+          />
+        </svg>
         <div
-          className="absolute left-6 top-0 h-full w-px sm:left-1/2"
+          className="absolute left-6 top-0 h-full w-px sm:hidden"
           style={{
             backgroundImage:
               "repeating-linear-gradient(to bottom, hsl(var(--copper)/0.7) 0 8px, transparent 8px 16px)",
           }}
         />
-        {timeline.map((item, index) => (
-          <div
-            key={item.title}
-            className={`relative mb-10 grid gap-6 sm:grid-cols-2 ${index % 2 ? "sm:text-left" : "sm:text-right"}`}
-            style={{ animationDelay: `${index * 0.12}s` }}
-          >
-            <div className={index % 2 ? "sm:col-start-2" : ""}>
-              <div className="paper-grain relative overflow-hidden border border-copper/25 bg-vellum p-6 shadow-[0_18px_48px_hsl(var(--moss-deep)/0.12)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_60px_hsl(var(--moss-deep)/0.2)] animate-fade-in-slow">
-                <div className={`flex items-center gap-3 ${index % 2 ? "" : "sm:justify-end"}`}>
-                  <span className="grid h-11 w-11 place-items-center border border-copper/30 bg-pearl text-copper shadow-[0_10px_26px_hsl(var(--moss-deep)/0.12)]">
-                    <item.icon className="h-5 w-5" />
-                  </span>
-                  <span className="font-display text-5xl font-semibold text-copper">{item.time}</span>
+        {timeline.map((item, index) => {
+          const offset = index % 2 === 0 ? "sm:translate-x-[-1.5rem]" : "sm:translate-x-[1.5rem]";
+          return (
+            <div
+              key={item.title}
+              className={`relative mb-12 grid gap-6 sm:grid-cols-2 ${index % 2 ? "sm:text-left" : "sm:text-right"}`}
+              style={{ animationDelay: `${index * 0.12}s` }}
+            >
+              <div className={index % 2 ? `sm:col-start-2 ${offset}` : offset}>
+                <div className="paper-grain relative overflow-hidden border border-copper/25 bg-vellum p-6 shadow-[0_18px_48px_hsl(var(--moss-deep)/0.12)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_60px_hsl(var(--moss-deep)/0.2)] animate-fade-in-slow">
+                  <div className={`flex items-center gap-3 ${index % 2 ? "" : "sm:justify-end"}`}>
+                    <item.icon className="h-7 w-7 text-copper-glow" />
+                    <span className="font-display text-5xl font-semibold text-copper">{item.time}</span>
+                  </div>
+                  <h3 className="mt-2 font-display text-3xl text-moss-deep">{item.title}</h3>
+                  <p className="mt-3 leading-7 text-muted-foreground">{item.text}</p>
                 </div>
-                <h3 className="mt-2 font-display text-3xl text-moss-deep">{item.title}</h3>
-                <p className="mt-3 leading-7 text-muted-foreground">{item.text}</p>
               </div>
+              <span className="absolute left-4 top-8 h-4 w-4 rounded-full border-[3px] border-background bg-copper shadow-[0_0_0_6px_hsl(var(--copper)/0.16)] sm:left-1/2 sm:-translate-x-1/2" />
             </div>
-            <span className="absolute left-4 top-8 h-5 w-5 rounded-full border-4 border-background bg-copper shadow-[0_0_0_8px_hsl(var(--copper)/0.16)] sm:left-1/2 sm:-translate-x-1/2" />
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
 
@@ -117,12 +133,12 @@ export const WeddingContent = () => (
       </div>
     </section>
 
-    <section id="map" className="container mx-auto grid gap-8 px-6 py-20 lg:grid-cols-2">
-      <div>
-        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Vietos</p>
-        <h2 className="font-display text-5xl font-semibold text-moss-deep">Susitinkame</h2>
+    <section id="map" className="container mx-auto px-6 py-20">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitikime?</p>
+        <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-copper to-transparent" />
       </div>
-      <div className="grid gap-4">
+      <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
         <a className="group border border-border bg-vellum p-6 transition-all duration-300 hover:border-copper hover:-translate-y-1 hover:shadow-[0_18px_40px_hsl(var(--moss-deep)/0.15)] animate-fade-in" href="https://www.google.com/maps/search/?api=1&query=%C5%A0v.+Kazimiero+ba%C5%BEny%C4%8Dia+Vilnius" target="_blank" rel="noreferrer">
           <MapPin className="h-6 w-6 text-copper" />
           <h3 className="mt-3 font-display text-3xl text-moss-deep group-hover:text-copper">Šv. Kazimiero bažnyčia</h3>
