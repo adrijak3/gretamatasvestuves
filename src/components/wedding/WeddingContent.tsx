@@ -27,7 +27,7 @@ export const WeddingContent = () => (
           Greta &amp; Matas
         </h2>
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir mūsų šventėje.
+          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje mūsų šventėje.
         </p>
       </div>
       <div className="paper-grain relative overflow-hidden border border-copper/30 bg-vellum p-7 animate-fade-in-slow hover:shadow-[0_36px_90px_hsl(var(--moss-deep)/0.25)] transition-shadow duration-500 shadow-[0_30px_80px_hsl(var(--moss-deep)/0.18)]">
