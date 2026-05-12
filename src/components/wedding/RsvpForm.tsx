@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
+import { GOOGLE_SHEETS_WEBHOOK_URL } from "@/config/integrations";
 
 type Guest = {
   id: string;
@@ -35,9 +36,6 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
   const isCouple = (guest?.party_size ?? 1) >= 2;
   const isClosed = useMemo(() => Date.now() >= deadline.getTime(), []);
 
-  const primary = useMemo(() => splitName(guest?.display_name), [guest?.display_name]);
-  const partner = useMemo(() => splitName(guest?.partner_name ?? ""), [guest?.partner_name]);
-
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (attending === null) {
@@ -50,24 +48,59 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
     }
 
     const form = new FormData(event.currentTarget);
+    const firstName = String(form.get("firstName") ?? "").trim();
+    const lastName = String(form.get("lastName") ?? "").trim();
+    if (attending && (!firstName || !lastName)) {
+      toast.error("Įrašykite vardą ir pavardę.");
+      return;
+    }
+
+    const payload = {
+      slug: guest?.slug ?? fallbackSlug,
+      first_name: firstName,
+      last_name: lastName,
+      partner_first_name: String(form.get("partnerFirstName") ?? "").trim(),
+      partner_last_name: String(form.get("partnerLastName") ?? "").trim(),
+      attending,
+      meal_choice: String(form.get("mealChoice") ?? ""),
+      partner_meal_choice: String(form.get("partnerMealChoice") ?? ""),
+      dietary_notes: String(form.get("dietaryNotes") ?? ""),
+      message: String(form.get("message") ?? ""),
+      submitted_at: new Date().toISOString(),
+    };
+
     setSaving(true);
     const { error } = await (supabase as any).rpc("submit_wedding_rsvp", {
-      _slug: guest?.slug ?? fallbackSlug,
-      _first_name: String(form.get("firstName") ?? primary.first),
-      _last_name: String(form.get("lastName") ?? primary.last),
-      _partner_first_name: String(form.get("partnerFirstName") ?? ""),
-      _partner_last_name: String(form.get("partnerLastName") ?? ""),
-      _attending: attending,
-      _meal_choice: String(form.get("mealChoice") ?? ""),
-      _partner_meal_choice: String(form.get("partnerMealChoice") ?? ""),
-      _dietary_notes: String(form.get("dietaryNotes") ?? ""),
-      _message: String(form.get("message") ?? ""),
+      _slug: payload.slug,
+      _first_name: payload.first_name,
+      _last_name: payload.last_name,
+      _partner_first_name: payload.partner_first_name,
+      _partner_last_name: payload.partner_last_name,
+      _attending: payload.attending,
+      _meal_choice: payload.meal_choice,
+      _partner_meal_choice: payload.partner_meal_choice,
+      _dietary_notes: payload.dietary_notes,
+      _message: payload.message,
     });
     setSaving(false);
 
     if (error) {
       toast.error(error.message.includes("RSVP_CLOSED") ? "Registracija jau uždaryta." : "Nepavyko išsaugoti atsakymo.");
       return;
+    }
+
+    // Optional: forward to Google Sheets via Apps Script webhook
+    if (GOOGLE_SHEETS_WEBHOOK_URL) {
+      try {
+        await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      } catch (e) {
+        console.warn("Google Sheets webhook nepavyko:", e);
+      }
     }
 
     setThanks(attending ? "yes" : "no");
@@ -100,11 +133,11 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                     Vardas
-                    <input name="firstName" defaultValue={primary.first} required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                    <input name="firstName" required placeholder="Vardas" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                   </label>
                   <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                     Pavardė
-                    <input name="lastName" defaultValue={primary.last} required className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                    <input name="lastName" required placeholder="Pavardė" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                   </label>
                 </div>
                 <label className="grid gap-2 text-sm font-semibold text-moss-deep">
@@ -124,11 +157,11 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
                     <div className="grid gap-4 sm:grid-cols-2">
                       <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                         Vardas
-                        <input name="partnerFirstName" defaultValue={partner.first} className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                        <input name="partnerFirstName" required placeholder="Vardas" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                       </label>
                       <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                         Pavardė
-                        <input name="partnerLastName" defaultValue={partner.last} className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                        <input name="partnerLastName" required placeholder="Pavardė" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                       </label>
                     </div>
                     <label className="grid gap-2 text-sm font-semibold text-moss-deep">

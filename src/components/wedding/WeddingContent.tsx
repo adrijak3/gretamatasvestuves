@@ -27,7 +27,7 @@ export const WeddingContent = () => (
           Greta &amp; Matas
         </h2>
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir mūsų šventėje.
+          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje mūsų šventėje.
         </p>
       </div>
       <div className="paper-grain relative overflow-hidden border border-copper/30 bg-vellum p-7 animate-fade-in-slow hover:shadow-[0_36px_90px_hsl(var(--moss-deep)/0.25)] transition-shadow duration-500 shadow-[0_30px_80px_hsl(var(--moss-deep)/0.18)]">
@@ -60,19 +60,19 @@ export const WeddingContent = () => (
         <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
-        {/* flowing curved pathway */}
+        {/* gentle wave pathway down the center */}
         <svg
           aria-hidden="true"
           viewBox="0 0 100 1000"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-32 -translate-x-1/2 sm:block"
+          className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-24 -translate-x-1/2 sm:block"
         >
           <path
-            d="M50 0 C 10 120, 90 240, 50 360 S 10 600, 50 720 S 90 920, 50 1000"
+            d="M50 0 Q 62 125 50 250 T 50 500 T 50 750 T 50 1000"
             fill="none"
-            stroke="hsl(var(--copper) / 0.55)"
-            strokeWidth="1.5"
-            strokeDasharray="2 10"
+            stroke="hsl(var(--copper) / 0.5)"
+            strokeWidth="1.25"
+            strokeDasharray="2 9"
             strokeLinecap="round"
           />
         </svg>
@@ -113,7 +113,7 @@ export const WeddingContent = () => (
         <article className="border border-pearl/15 bg-pearl/10 p-6 backdrop-blur animate-fade-in hover:bg-pearl/20 hover:-translate-y-1 transition-all duration-300">
           <Shirt className="h-7 w-7 text-copper-glow" />
           <h3 className="mt-5 font-display text-3xl">Aprangos kodas</h3>
-          <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai ar švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
+          <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai/švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {dressColors.map((color) => (
               <span key={color.name} title={color.name} className={`h-8 w-8 rounded-full border border-pearl/35 ${color.className}`} />
@@ -135,7 +135,7 @@ export const WeddingContent = () => (
 
     <section id="map" className="container mx-auto px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitikime?</p>
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitiksime?</p>
         <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-copper to-transparent" />
       </div>
       <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
