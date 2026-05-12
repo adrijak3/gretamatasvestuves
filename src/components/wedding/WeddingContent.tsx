@@ -113,7 +113,7 @@ export const WeddingContent = () => (
         <article className="border border-pearl/15 bg-pearl/10 p-6 backdrop-blur animate-fade-in hover:bg-pearl/20 hover:-translate-y-1 transition-all duration-300">
           <Shirt className="h-7 w-7 text-copper-glow" />
           <h3 className="mt-5 font-display text-3xl">Aprangos kodas</h3>
-          <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai ar švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
+          <p className="mt-3 text-pearl/75">Moterys — ilgos suknelės, vyrai — kostiumai/švarkai. Venkite baltos, bordo ir labai šviesių tonų.</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {dressColors.map((color) => (
               <span key={color.name} title={color.name} className={`h-8 w-8 rounded-full border border-pearl/35 ${color.className}`} />
@@ -135,7 +135,7 @@ export const WeddingContent = () => (
 
     <section id="map" className="container mx-auto px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitikime?</p>
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitiksime?</p>
         <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-copper to-transparent" />
       </div>
       <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
