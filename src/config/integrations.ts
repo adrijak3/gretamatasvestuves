@@ -30,4 +30,4 @@
 // Jei laukas paliktas tuščias — RSVP atsakymai vis tiek
 // saugojami duomenų bazėje ir matomi admin skydelyje.
 
-export const GOOGLE_SHEETS_WEBHOOK_URL = "";
+export const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyB0RjVkVjEdeY90TJCAcIvqn-owH0atk3VowXmDM1xJ3yBxobL3AHxprCOX9zLd2mtiQ/exec";
