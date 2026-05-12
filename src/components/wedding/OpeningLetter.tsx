@@ -89,7 +89,7 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
             aria-label="Atverti voką"
             className="group relative z-20 block w-full disabled:pointer-events-none"
           >
-            <div className="relative aspect-[5/3.35] w-full overflow-hidden rounded-sm border border-copper/25 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_32px_80px_hsl(var(--moss-deep)/0.34)] transition-transform duration-700 group-hover:-translate-y-1">
+            <div className="relative aspect-[5/3.35] w-full overflow-hidden rounded-sm border border-copper/25 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_32px_80px_hsl(var(--moss-deep)/0.34)] transition-shadow duration-500 group-hover:shadow-[0_38px_100px_hsl(var(--moss-deep)/0.42)]">
               <div className="lace-band absolute left-0 right-0 top-0 h-16" />
               <div className="lace-band absolute bottom-0 left-0 right-0 h-12 rotate-180 opacity-80" />
               <div className="absolute inset-x-8 top-14 border-t border-copper/25" />
@@ -99,7 +99,6 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
                 <h1 className="mt-3 font-display text-4xl font-semibold leading-none text-moss-deep sm:text-5xl">
                   Greta ir Matas
                 </h1>
-                <p className="mt-3 font-body text-sm uppercase tracking-[0.24em] text-copper">spausti ir atverti</p>
               </div>
               <div className="absolute bottom-0 left-0 h-1/2 w-full bg-[linear-gradient(32deg,transparent_49%,hsl(var(--copper)/0.18)_50%,transparent_51%),linear-gradient(-32deg,transparent_49%,hsl(var(--copper)/0.18)_50%,transparent_51%)]" />
             </div>

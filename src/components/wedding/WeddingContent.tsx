@@ -27,7 +27,7 @@ export const WeddingContent = () => (
           Greta &amp; Matas
         </h2>
         <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir labai mūsų šventėje.
+          Rugsėjo 6 dieną kviečiame Jus pasitikti mūsų svarbiausią dieną — su žmonėmis, kurie mums brangūs. Lauksime Jūsų jaukioje, šiltoje ir mūsų šventėje.
         </p>
       </div>
       <div className="paper-grain relative overflow-hidden border border-copper/30 bg-vellum p-7 animate-fade-in-slow hover:shadow-[0_36px_90px_hsl(var(--moss-deep)/0.25)] transition-shadow duration-500 shadow-[0_30px_80px_hsl(var(--moss-deep)/0.18)]">
@@ -117,12 +117,12 @@ export const WeddingContent = () => (
       </div>
     </section>
 
-    <section id="map" className="container mx-auto grid gap-8 px-6 py-20 lg:grid-cols-2">
-      <div>
-        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Vietos</p>
-        <h2 className="font-display text-5xl font-semibold text-moss-deep">Susitinkame</h2>
+    <section id="map" className="container mx-auto px-6 py-20">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Kur susitikime?</p>
+        <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-copper to-transparent" />
       </div>
-      <div className="grid gap-4">
+      <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
         <a className="group border border-border bg-vellum p-6 transition-all duration-300 hover:border-copper hover:-translate-y-1 hover:shadow-[0_18px_40px_hsl(var(--moss-deep)/0.15)] animate-fade-in" href="https://www.google.com/maps/search/?api=1&query=%C5%A0v.+Kazimiero+ba%C5%BEny%C4%8Dia+Vilnius" target="_blank" rel="noreferrer">
           <MapPin className="h-6 w-6 text-copper" />
           <h3 className="mt-3 font-display text-3xl text-moss-deep group-hover:text-copper">Šv. Kazimiero bažnyčia</h3>
