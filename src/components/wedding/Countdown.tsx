@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 
 const target = new Date("2026-09-06T15:00:00+03:00").getTime();
 
@@ -32,17 +32,17 @@ export const Countdown = () => {
         <p className="font-display italic text-3xl text-copper-glow sm:text-4xl tracking-[0.2em] uppercase">Skaičiuojame akimirkas</p>
         <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 items-stretch gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
           {entries.map(([label, value], idx) => (
-            <>
-              <div key={label} className="paper-grain overflow-hidden border border-pearl/20 bg-pearl/10 p-5 backdrop-blur-sm transition-transform hover:-translate-y-1">
+            <Fragment key={label}>
+              <div className="paper-grain overflow-hidden border border-pearl/20 bg-pearl/10 p-5 backdrop-blur-sm transition-transform hover:-translate-y-1">
                 <div className="font-display text-5xl font-semibold tabular-nums sm:text-6xl">{String(value).padStart(2, "0")}</div>
                 <div className="mt-2 text-xs uppercase tracking-[0.25em] text-pearl/75">{label}</div>
               </div>
               {idx < entries.length - 1 && (
-                <div key={`sep-${label}`} className="hidden items-center justify-center text-copper-glow/60 sm:flex" aria-hidden>
+                <div className="hidden items-center justify-center text-copper-glow/60 sm:flex" aria-hidden>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 4 7 8 8-4 1-7 4-8 8-1-4-4-7-8-8 4-1 7-4 8-8z"/></svg>
                 </div>
               )}
-            </>
+            </Fragment>
           ))}
         </div>
       </div>
