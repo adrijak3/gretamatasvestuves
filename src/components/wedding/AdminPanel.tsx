@@ -32,7 +32,7 @@ const emptyGuest = {
   id: "",
   slug: "",
   display_name: "",
-  greeting: "Miela(s) ... ,",
+  greeting: "",
   partner_name: "",
   party_size: 1,
   notes: "",
@@ -174,7 +174,7 @@ export const AdminPanel = () => {
                     <Button type="button" variant="vellum" size="sm" onClick={() => setEditing(emptyGuest)}><Plus className="h-4 w-4" /> Naujas</Button>
                   </div>
                   <input placeholder="Vardas / svečiai" value={editing.display_name} onChange={(event) => setEditing({ ...editing, display_name: event.target.value, slug: editing.slug || makeSlug(event.target.value) })} className="border border-input bg-background px-4 py-3 text-foreground" required />
-                  <input placeholder="Kreipinys, pvz. Miela Greta," value={editing.greeting} onChange={(event) => setEditing({ ...editing, greeting: event.target.value })} className="border border-input bg-background px-4 py-3 text-foreground" required />
+                  <input placeholder="Pilnas kreipinys, pvz. Miela Greta," value={editing.greeting} onChange={(event) => setEditing({ ...editing, greeting: event.target.value })} className="border border-input bg-background px-4 py-3 text-foreground" required />
                   <input placeholder="Nuorodos kodas" value={editing.slug} onChange={(event) => setEditing({ ...editing, slug: makeSlug(event.target.value) })} className="border border-input bg-background px-4 py-3 text-foreground" required />
                   <input placeholder="Antro svečio vardas, jei yra" value={editing.partner_name ?? ""} onChange={(event) => setEditing({ ...editing, partner_name: event.target.value, party_size: event.target.value ? 2 : editing.party_size })} className="border border-input bg-background px-4 py-3 text-foreground" />
                   <select value={editing.party_size} onChange={(event) => setEditing({ ...editing, party_size: Number(event.target.value) })} className="border border-input bg-background px-4 py-3 text-foreground">
