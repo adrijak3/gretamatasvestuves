@@ -60,19 +60,19 @@ export const WeddingContent = () => (
         <h2 className="font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Dienos eiga</h2>
       </div>
       <div className="relative mx-auto mt-14 max-w-4xl">
-        {/* flowing curved pathway */}
+        {/* gentle wave pathway down the center */}
         <svg
           aria-hidden="true"
           viewBox="0 0 100 1000"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-32 -translate-x-1/2 sm:block"
+          className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-24 -translate-x-1/2 sm:block"
         >
           <path
-            d="M50 0 C 10 120, 90 240, 50 360 S 10 600, 50 720 S 90 920, 50 1000"
+            d="M50 0 Q 62 125 50 250 T 50 500 T 50 750 T 50 1000"
             fill="none"
-            stroke="hsl(var(--copper) / 0.55)"
-            strokeWidth="1.5"
-            strokeDasharray="2 10"
+            stroke="hsl(var(--copper) / 0.5)"
+            strokeWidth="1.25"
+            strokeDasharray="2 9"
             strokeLinecap="round"
           />
         </svg>
