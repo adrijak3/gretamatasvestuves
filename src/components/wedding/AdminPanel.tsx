@@ -210,7 +210,7 @@ export const AdminPanel = () => {
                         <div key={guest.id} className="grid gap-3 border border-border bg-vellum p-4 sm:grid-cols-[1fr_auto] sm:items-center">
                           <div className="min-w-0">
                             <p className="truncate font-display text-2xl text-moss-deep">{guest.display_name}</p>
-                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={encodeURIComponent(guest.slug)}</p>
+                            <p className="truncate text-sm text-muted-foreground">{firstNamesFor(guest) ? `${baseUrl}?n=${encodeURIComponent(firstNamesFor(guest))}` : `${baseUrl}?s=${encodeURIComponent(guest.slug)}`}</p>
                           </div>
                           <div className="flex gap-2">
                             <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
