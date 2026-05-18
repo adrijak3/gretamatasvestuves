@@ -195,6 +195,24 @@ export type Database = {
         }[]
       }
       is_wedding_admin: { Args: { _token: string }; Returns: boolean }
+      submit_public_wedding_rsvp: {
+        Args: {
+          _attending: boolean
+          _dietary_notes: string
+          _display_name: string
+          _first_name: string
+          _greeting: string
+          _last_name: string
+          _meal_choice: string
+          _message: string
+          _partner_first_name: string
+          _partner_last_name: string
+          _partner_meal_choice: string
+          _party_size: number
+          _slug: string
+        }
+        Returns: string
+      }
       submit_wedding_rsvp: {
         Args: {
           _attending: boolean
