@@ -36,6 +36,13 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
   const isCouple = (guest?.party_size ?? 1) >= 2;
   const isClosed = useMemo(() => Date.now() >= deadline.getTime(), []);
 
+  const prefill = useMemo(() => {
+    if (typeof window === "undefined") return { first: "", partnerFirst: "" };
+    const raw = new URLSearchParams(window.location.search).get("n") ?? "";
+    const firsts = raw.split(/[,;|]/).map((n) => n.trim().split(/\s+/)[0]).filter(Boolean);
+    return { first: firsts[0] ?? "", partnerFirst: firsts[1] ?? "" };
+  }, []);
+
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (attending === null) {
@@ -70,18 +77,36 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
     };
 
     setSaving(true);
-    const { error } = await (supabase as any).rpc("submit_wedding_rsvp", {
-      _slug: payload.slug,
-      _first_name: payload.first_name,
-      _last_name: payload.last_name,
-      _partner_first_name: payload.partner_first_name,
-      _partner_last_name: payload.partner_last_name,
-      _attending: payload.attending,
-      _meal_choice: payload.meal_choice,
-      _partner_meal_choice: payload.partner_meal_choice,
-      _dietary_notes: payload.dietary_notes,
-      _message: payload.message,
-    });
+    // If no DB guest (public ?n= link or fallback), use the public RPC that creates a guest on demand.
+    const usePublic = !guest?.id;
+    const { error } = usePublic
+      ? await (supabase as any).rpc("submit_public_wedding_rsvp", {
+          _slug: payload.slug,
+          _display_name: guest?.display_name ?? "Svečias",
+          _greeting: guest?.greeting ?? "Mieli svečiai,",
+          _party_size: guest?.party_size ?? 1,
+          _first_name: payload.first_name,
+          _last_name: payload.last_name,
+          _partner_first_name: payload.partner_first_name,
+          _partner_last_name: payload.partner_last_name,
+          _attending: payload.attending,
+          _meal_choice: payload.meal_choice,
+          _partner_meal_choice: payload.partner_meal_choice,
+          _dietary_notes: payload.dietary_notes,
+          _message: payload.message,
+        })
+      : await (supabase as any).rpc("submit_wedding_rsvp", {
+          _slug: payload.slug,
+          _first_name: payload.first_name,
+          _last_name: payload.last_name,
+          _partner_first_name: payload.partner_first_name,
+          _partner_last_name: payload.partner_last_name,
+          _attending: payload.attending,
+          _meal_choice: payload.meal_choice,
+          _partner_meal_choice: payload.partner_meal_choice,
+          _dietary_notes: payload.dietary_notes,
+          _message: payload.message,
+        });
     setSaving(false);
 
     if (error) {
