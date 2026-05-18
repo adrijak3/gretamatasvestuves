@@ -125,13 +125,27 @@ export const AdminPanel = () => {
     await load();
   };
 
-  const copyLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}`);
+  const firstNamesFor = (g: GuestRow) => {
+    const first = (g.display_name || "").trim().split(/\s+/)[0] || "";
+    const partnerFirst = (g.partner_name || "").trim().split(/\s+/)[0] || "";
+    return [first, partnerFirst].filter(Boolean).join(",");
+  };
+
+  const copyLink = async (guest: GuestRow) => {
+    const names = firstNamesFor(guest);
+    const url = names
+      ? `${baseUrl}?n=${encodeURIComponent(names)}`
+      : `${baseUrl}?s=${encodeURIComponent(guest.slug)}`;
+    await navigator.clipboard.writeText(url);
     toast.success("Nuoroda nukopijuota.");
   };
 
-  const copyRsvpLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}#rsvp`);
+  const copyRsvpLink = async (guest: GuestRow) => {
+    const names = firstNamesFor(guest);
+    const url = names
+      ? `${baseUrl}?n=${encodeURIComponent(names)}#rsvp`
+      : `${baseUrl}?s=${encodeURIComponent(guest.slug)}#rsvp`;
+    await navigator.clipboard.writeText(url);
     toast.success("RSVP nuoroda nukopijuota.");
   };
 
@@ -196,11 +210,11 @@ export const AdminPanel = () => {
                         <div key={guest.id} className="grid gap-3 border border-border bg-vellum p-4 sm:grid-cols-[1fr_auto] sm:items-center">
                           <div className="min-w-0">
                             <p className="truncate font-display text-2xl text-moss-deep">{guest.display_name}</p>
-                            <p className="truncate text-sm text-muted-foreground">{baseUrl}?s={encodeURIComponent(guest.slug)}</p>
+                            <p className="truncate text-sm text-muted-foreground">{firstNamesFor(guest) ? `${baseUrl}?n=${encodeURIComponent(firstNamesFor(guest))}` : `${baseUrl}?s=${encodeURIComponent(guest.slug)}`}</p>
                           </div>
                           <div className="flex gap-2">
-                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest.slug)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
-                            <Button type="button" variant="vellum" size="sm" onClick={() => copyRsvpLink(guest.slug)} title="RSVP nuoroda (vardas + auto-užpildymas)"><MailCheck className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyLink(guest)} title="Kvietimo nuoroda"><Link2 className="h-4 w-4" /></Button>
+                            <Button type="button" variant="vellum" size="sm" onClick={() => copyRsvpLink(guest)} title="RSVP nuoroda (vardas + auto-užpildymas)"><MailCheck className="h-4 w-4" /></Button>
                             <Button type="button" variant="moss" size="sm" onClick={() => setEditing({ ...guest, partner_name: guest.partner_name ?? "", notes: guest.notes ?? "" })}>Keisti</Button>
                             <Button type="button" variant="destructive" size="sm" onClick={() => deleteGuest(guest.id)}><Trash2 className="h-4 w-4" /></Button>
                           </div>
