@@ -125,13 +125,27 @@ export const AdminPanel = () => {
     await load();
   };
 
-  const copyLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}`);
+  const firstNamesFor = (g: GuestRow) => {
+    const first = (g.display_name || "").trim().split(/\s+/)[0] || "";
+    const partnerFirst = (g.partner_name || "").trim().split(/\s+/)[0] || "";
+    return [first, partnerFirst].filter(Boolean).join(",");
+  };
+
+  const copyLink = async (guest: GuestRow) => {
+    const names = firstNamesFor(guest);
+    const url = names
+      ? `${baseUrl}?n=${encodeURIComponent(names)}`
+      : `${baseUrl}?s=${encodeURIComponent(guest.slug)}`;
+    await navigator.clipboard.writeText(url);
     toast.success("Nuoroda nukopijuota.");
   };
 
-  const copyRsvpLink = async (slug: string) => {
-    await navigator.clipboard.writeText(`${baseUrl}?s=${encodeURIComponent(slug)}#rsvp`);
+  const copyRsvpLink = async (guest: GuestRow) => {
+    const names = firstNamesFor(guest);
+    const url = names
+      ? `${baseUrl}?n=${encodeURIComponent(names)}#rsvp`
+      : `${baseUrl}?s=${encodeURIComponent(guest.slug)}#rsvp`;
+    await navigator.clipboard.writeText(url);
     toast.success("RSVP nuoroda nukopijuota.");
   };
 
