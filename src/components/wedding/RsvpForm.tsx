@@ -182,7 +182,7 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
                     <div className="grid gap-4 sm:grid-cols-2">
                       <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                         Vardas
-                        <input name="partnerFirstName" required placeholder="Vardas" className="border border-input bg-background px-4 py-3 font-body text-foreground" />
+                        <input name="partnerFirstName" required placeholder="Vardas" defaultValue={prefill.partnerFirst} className="border border-input bg-background px-4 py-3 font-body text-foreground" />
                       </label>
                       <label className="grid gap-2 text-sm font-semibold text-moss-deep">
                         Pavardė
