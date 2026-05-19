@@ -29,7 +29,7 @@ export const Countdown = () => {
       <div aria-hidden className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,hsl(350_60%_85%/0.18),transparent_70%)]" />
       <div aria-hidden className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,hsl(var(--copper)/0.18),transparent_70%)]" />
       <div className="container relative mx-auto px-6 text-center">
-        <p className="font-display italic text-3xl text-copper-glow sm:text-4xl tracking-[0.2em] uppercase">Skaičiuojame akimirkas</p>
+        <p className="font-display italic text-3xl text-copper-glow sm:text-4xl tracking-[0.2em] uppercase">Iki vestuvių liko</p>
         <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 items-stretch gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
           {entries.map(([label, value], idx) => (
             <Fragment key={label}>
