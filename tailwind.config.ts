@@ -70,6 +70,10 @@ export default {
         pearl: "hsl(var(--pearl))",
         vellum: "hsl(var(--vellum))",
         navy: "hsl(var(--navy))",
+        chocolate: {
+          DEFAULT: "hsl(var(--chocolate))",
+          glow: "hsl(var(--chocolate-glow))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

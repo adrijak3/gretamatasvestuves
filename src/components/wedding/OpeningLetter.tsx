@@ -1,5 +1,5 @@
 import { useState } from "react";
-import laceBorder from "@/assets/lace-border.png";
+
 
 type OpeningLetterProps = {
   greeting: string;
@@ -52,28 +52,59 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
             aria-hidden={!opening}
           >
             <svg viewBox="0 0 500 455" className="absolute inset-0 h-full w-full" aria-hidden="true">
+              <defs>
+                <pattern id="laceDots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <circle cx="2" cy="2" r="1.4" fill="hsl(var(--pearl))" />
+                </pattern>
+              </defs>
+              {/* outer white lace ring */}
               <path
-                d="M250 420C168 347 72 282 72 173c0-61 44-105 99-105 36 0 63 18 79 45 16-27 43-45 79-45 55 0 99 44 99 105 0 109-96 174-178 247Z"
-                fill="hsl(var(--pearl) / 0.92)"
+                d="M250 432C160 354 56 287 56 168c0-68 50-118 112-118 40 0 70 22 82 50 12-28 42-50 82-50 62 0 112 50 112 118 0 119-104 186-194 264Z"
+                fill="none"
                 stroke="hsl(var(--pearl))"
-                strokeWidth="34"
+                strokeWidth="22"
                 strokeLinecap="round"
-                strokeLinejoin="round"
               />
               <path
-                d="M250 420C168 347 72 282 72 173c0-61 44-105 99-105 36 0 63 18 79 45 16-27 43-45 79-45 55 0 99 44 99 105 0 109-96 174-178 247Z"
+                d="M250 432C160 354 56 287 56 168c0-68 50-118 112-118 40 0 70 22 82 50 12-28 42-50 82-50 62 0 112 50 112 118 0 119-104 186-194 264Z"
                 fill="none"
-                stroke="hsl(var(--copper) / 0.42)"
-                strokeWidth="2"
-                strokeDasharray="2 14"
+                stroke="url(#laceDots)"
+                strokeWidth="22"
               />
               <path
-                d="M250 408C174 341 90 281 90 178c0-50 35-87 83-87 35 0 59 23 77 58 18-35 42-58 77-58 48 0 83 37 83 87 0 103-84 163-160 230Z"
+                d="M250 432C160 354 56 287 56 168c0-68 50-118 112-118 40 0 70 22 82 50 12-28 42-50 82-50 62 0 112 50 112 118 0 119-104 186-194 264Z"
                 fill="none"
-                stroke="hsl(var(--moss-deep) / 0.16)"
+                stroke="hsl(var(--pearl) / 0.85)"
+                strokeWidth="6"
+                strokeDasharray="1 6"
+              />
+              {/* inner heart card */}
+              <path
+                d="M250 408C170 343 88 282 88 178c0-54 38-94 90-94 36 0 62 22 80 56 18-34 44-56 80-56 52 0 90 40 90 94 0 104-82 165-162 230Z"
+                fill="hsl(var(--pearl) / 0.96)"
+                stroke="hsl(var(--copper) / 0.35)"
                 strokeWidth="1.5"
               />
             </svg>
+
+            {/* heart burst around invitation */}
+            <div className="heart-burst absolute inset-0 z-20">
+              {[
+                { dx: "-180px", dy: "-160px", d: "0s" },
+                { dx: "180px", dy: "-160px", d: ".4s" },
+                { dx: "-210px", dy: "20px", d: ".8s" },
+                { dx: "210px", dy: "20px", d: "1.2s" },
+                { dx: "-120px", dy: "180px", d: "1.6s" },
+                { dx: "120px", dy: "180px", d: "2s" },
+              ].map((h, i) => (
+                <span key={i} style={{ ["--dx" as any]: h.dx, ["--dy" as any]: h.dy, animationDelay: h.d }}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-full w-full">
+                    <path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg>
+                </span>
+              ))}
+            </div>
+
             <div className="relative z-10 mx-auto flex aspect-[1.1/1] w-full flex-col items-center justify-center px-14 pb-12 pt-16 text-center">
               <p className="font-display text-2xl font-semibold leading-tight text-moss-deep sm:text-3xl">{greeting}</p>
               <p className="mt-3 max-w-[250px] text-sm leading-6 text-muted-foreground sm:text-base">
@@ -91,13 +122,6 @@ export const OpeningLetter = ({ greeting, onOpen }: OpeningLetterProps) => {
             className="group relative z-20 block w-full disabled:pointer-events-none"
           >
             <div className="relative aspect-[5/3.35] w-full overflow-hidden rounded-sm border border-copper/25 bg-[linear-gradient(180deg,hsl(var(--pearl)),hsl(var(--vellum)))] shadow-[0_32px_80px_hsl(var(--moss-deep)/0.34)] transition-shadow duration-500 group-hover:shadow-[0_38px_100px_hsl(var(--moss-deep)/0.42)]">
-              {/* real lace border fitted to the envelope */}
-              <img
-                src={laceBorder}
-                alt=""
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 z-20 h-full w-full select-none object-fill opacity-90 mix-blend-multiply"
-              />
               <div className="absolute inset-x-8 top-20 z-30 text-center">
                 <p className="font-display text-sm uppercase tracking-[0.36em] text-moss-deep/65">Vestuvinis kvietimas</p>
                 <h1 className="mt-3 font-display text-4xl font-semibold leading-none text-moss-deep sm:text-5xl">
