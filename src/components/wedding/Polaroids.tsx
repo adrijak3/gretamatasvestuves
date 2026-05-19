@@ -1,4 +1,5 @@
-import { Camera, Leaf } from "lucide-react";
+import { Camera, Heart } from "lucide-react";
+import groomChild from "@/assets/groom-child.png";
 
 type PolaroidProps = {
   name: string;
@@ -13,7 +14,7 @@ const Polaroid = ({ name, role, rotate, imgSrc }: PolaroidProps) => (
   >
     <div className="relative aspect-[4/5] overflow-hidden bg-[linear-gradient(180deg,hsl(var(--moss-soft)/0.4),hsl(var(--vellum)))]">
       {imgSrc ? (
-        <img src={imgSrc} alt={name} className="h-full w-full object-cover" />
+        <img src={imgSrc} alt={name} loading="lazy" className="h-full w-full object-cover" />
       ) : (
         <div className="grid h-full w-full place-items-center text-moss-deep/40">
           <Camera className="h-10 w-10" aria-hidden="true" />
@@ -29,67 +30,20 @@ const Polaroid = ({ name, role, rotate, imgSrc }: PolaroidProps) => (
   </figure>
 );
 
-const Vine = ({ className, flip = false }: { className?: string; flip?: boolean }) => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 240 360"
-    className={`${className ?? ""} ${flip ? "-scale-x-100" : ""}`}
-    fill="none"
-  >
-    <path
-      d="M30 10 C 90 60, 40 140, 110 190 S 60 290, 150 350"
-      stroke="hsl(var(--moss-deep) / 0.55)"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-    {[
-      [70, 70],
-      [98, 130],
-      [125, 195],
-      [88, 250],
-      [148, 320],
-    ].map(([cx, cy], i) => (
-      <g key={i} transform={`translate(${cx} ${cy})`}>
-        <circle r="6" fill="hsl(var(--copper) / 0.75)" />
-        <circle r="2" fill="hsl(var(--pearl))" />
-      </g>
-    ))}
-    {[
-      [55, 95, -25],
-      [115, 160, 30],
-      [80, 220, -20],
-      [135, 280, 25],
-    ].map(([x, y, r], i) => (
-      <g key={`l${i}`} transform={`translate(${x} ${y}) rotate(${r})`}>
-        <path d="M0 0 C 14 -6 28 -2 30 12 C 18 18 4 14 0 0 Z" fill="hsl(var(--moss) / 0.55)" />
-      </g>
-    ))}
-  </svg>
-);
-
 export const Polaroids = () => (
   <section className="relative overflow-hidden bg-vellum py-20">
-    {/* decorative vines */}
-    <Vine className="pointer-events-none absolute -left-4 top-6 hidden h-[360px] w-[200px] opacity-80 md:block" />
-    <Vine
-      flip
-      className="pointer-events-none absolute -right-4 bottom-6 hidden h-[360px] w-[200px] opacity-80 md:block"
-    />
     <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--copper)/0.08),transparent_60%)]" />
 
     <div className="container relative mx-auto px-6 text-center">
-      <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Prisiminimai</p>
-      <h2 className="mt-2 font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Mes</h2>
-      <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-        Keletas akimirkų, kurias norime pasidalinti su jumis.
-      </p>
+      <p className="font-display italic text-3xl uppercase tracking-[0.45em] text-copper">Atpažįstate šiuos mažuosius?</p>
+      <h2 className="mt-2 font-display text-5xl font-semibold text-moss-deep sm:text-6xl">Tai mes vaikystėje!</h2>
 
       <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
         <Polaroid name="Greta" role="Nuotaka" rotate="-rotate-6" />
         <div className="hidden text-copper sm:block">
-          <Leaf className="h-8 w-8 -rotate-12" />
+          <Heart className="h-7 w-7 fill-copper/30" />
         </div>
-        <Polaroid name="Matas" role="Jaunikis" rotate="rotate-6" />
+        <Polaroid name="Matas" role="Jaunikis" rotate="rotate-6" imgSrc={groomChild} />
       </div>
     </div>
   </section>
