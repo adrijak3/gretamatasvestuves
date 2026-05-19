@@ -48,6 +48,8 @@
     --pearl: 38 45% 97%;
     --vellum: 38 38% 93%;
     --navy: 218 22% 28%;
+    --chocolate: 22 55% 26%;
+    --chocolate-glow: 22 52% 42%;
 
     --sidebar-background: 54 42% 93%;
     --sidebar-foreground: 93 25% 14%;
@@ -191,6 +193,33 @@
       transform: translate(-50%, -18%) scale(1) rotate(0deg);
     }
   }
+
+  .heart-burst {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .heart-burst span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    color: hsl(var(--copper));
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: heart-pop 2.8s ease-out infinite;
+  }
+  @keyframes heart-pop {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+    20% { opacity: 0.9; }
+    100% {
+      opacity: 0;
+      transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1);
+    }
+  }
+
+  .wave-divider svg { display: block; width: 100%; height: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
