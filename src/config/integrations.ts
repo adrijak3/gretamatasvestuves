@@ -1,33 +1,46 @@
 // ============================================================
-// Integracijos / Integrations
+// Google Sheets RSVP webhook
 // ============================================================
 //
-// Google Sheets RSVP webhook
-// --------------------------
-// Norėdami, kad RSVP atsakymai automatiškai būtų įrašomi į
-// Google Sheets, atlikite šiuos žingsnius:
+// Spreadsheet:
+// https://docs.google.com/spreadsheets/d/1zJ5fPq1nEc9UPEnp9JXv8KyVFDKHNIbTSVofteuLvWc/edit
 //
-// 1. Atidarykite savo Google Sheets dokumentą.
-// 2. Meniu pasirinkite: Extensions → Apps Script
-// 3. Įklijuokite šį kodą (pakeiskite SHEET_NAME jei reikia):
+// SETUP — atlikite šiuos žingsnius vieną kartą:
+//
+// 1. Atidarykite Sheets dokumentą virš šio teksto.
+// 2. Extensions → Apps Script.
+// 3. Ištrinkite viską ir įklijuokite ŠĮ kodą (jis atitinka frontend payload'ą):
+//
+//    const SHEET_NAME = 'RSVP';
+//    const HEADERS = [
+//      'submitted_at','slug','attending',
+//      'first_name','last_name','meal_choice',
+//      'partner_first_name','partner_last_name','partner_meal_choice',
+//      'dietary_notes','message'
+//    ];
 //
 //    function doPost(e) {
-//      const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('RSVP') 
-//        || SpreadsheetApp.getActiveSpreadsheet().insertSheet('RSVP');
+//      const ss = SpreadsheetApp.getActiveSpreadsheet();
+//      const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+//      if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
+//      // Frontend siunčia text/plain, kad išvengtų CORS preflight'o.
 //      const data = JSON.parse(e.postData.contents);
-//      if (sheet.getLastRow() === 0) {
-//        sheet.appendRow(Object.keys(data));
-//      }
-//      sheet.appendRow(Object.keys(data).map(k => data[k]));
-//      return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+//      sheet.appendRow(HEADERS.map(h => data[h] ?? ''));
+//      return ContentService
+//        .createTextOutput(JSON.stringify({ ok: true }))
 //        .setMimeType(ContentService.MimeType.JSON);
 //    }
 //
-// 4. Spauskite "Deploy" → "New deployment" → tipas "Web app"
-//    Execute as: Me, Who has access: Anyone
-// 5. Nukopijuokite gautą URL ir įklijuokite žemiau.
+//    function doGet() {
+//      return ContentService.createTextOutput('ok');
+//    }
 //
-// Jei laukas paliktas tuščias — RSVP atsakymai vis tiek
-// saugojami duomenų bazėje ir matomi admin skydelyje.
+// 4. Spauskite Deploy → New deployment → Type: Web app.
+//    Execute as: Me. Who has access: Anyone.
+// 5. Nukopijuokite gautą /exec URL ir įklijuokite žemiau.
+//
+// SVARBU: kiekvieną kartą, kai keičiate Apps Script kodą,
+// reikia "Deploy → Manage deployments → Edit → New version".
 
-export const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyB0RjVkVjEdeY90TJCAcIvqn-owH0atk3VowXmDM1xJ3yBxobL3AHxprCOX9zLd2mtiQ/exec";
+export const GOOGLE_SHEETS_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbyB0RjVkVjEdeY90TJCAcIvqn-owH0atk3VowXmDM1xJ3yBxobL3AHxprCOX9zLd2mtiQ/exec";

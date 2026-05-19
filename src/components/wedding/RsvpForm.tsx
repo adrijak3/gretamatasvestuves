@@ -120,7 +120,8 @@ export const RsvpForm = ({ guest, fallbackSlug }: RsvpFormProps) => {
         await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
           method: "POST",
           mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
+          // text/plain avoids a CORS preflight that Apps Script rejects.
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload),
         });
       } catch (e) {
